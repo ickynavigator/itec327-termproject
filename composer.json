@@ -1,10 +1,12 @@
 {
-    "name": "ickynavigator/itec327-term-project",
-    "authors": [
-        {
-            "name": "Obi Fortune",
-            "email": "gabrielobi.of@gmail.com"
-        }
-    ],
-    "require": {}
+  "name": "ickynavigator/itec327-term-project",
+  "authors": [
+    {
+      "name": "Obi Fortune",
+      "email": "gabrielobi.of@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.0.0"
+  }
 }
