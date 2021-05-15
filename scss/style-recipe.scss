@@ -1,0 +1,16 @@
+@import "./vars.scss";
+
+.test-image {
+  background: $clr-select;
+  border-radius: 1rem;
+  @include htwt(30rem);
+}
+
+input[type="checkbox"]:checked {
+  // & + span,
+  // & + label,
+  // & ~ p {
+  & ~ * {
+    color: $clr-grey !important;
+  }
+}

@@ -1,0 +1,44 @@
+@import "./vars";
+
+html,
+body {
+  height: 100%;
+}
+
+.leftDiv {
+  form {
+    input {
+      background: transparent;
+      border-width: 2px;
+      &[type="submit"] {
+        border: none;
+        background: $clr-select !important;
+        transition: 0.5s;
+        &:hover,
+        &:focus {
+          opacity: 0.75;
+        }
+      }
+      &:focus {
+        box-shadow: none;
+        border-color: $clr-select;
+      }
+    }
+  }
+}
+
+.rightDiv {
+  border-radius: 1.5rem;
+  background: $clr-select;
+  color: $clr-white;
+  button {
+    border: none;
+    background: $clr-white !important;
+    color: $clr-black;
+    transition: 0.5s;
+    &:hover,
+    &:focus {
+      opacity: 0.75;
+    }
+  }
+}

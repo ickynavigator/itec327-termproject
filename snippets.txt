@@ -1,0 +1,125 @@
+    <!-- <div class="main-content row">
+        <div class="wrapper col-8">
+            <h3 class="main-title">A Main Recipe</h3>
+            <img class="main-image" src="./images/sample.jpeg" alt="">
+            <div class="main-body">
+                <h4>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, quasi?
+                </h4>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel, corporis doloremque minima velit,
+                    assumenda iste doloribus enim ullam reprehenderit eveniet cumque veritatis, recusandae accusantium
+                    soluta nesciunt in mollitia autem. Accusantium repellat tempora reiciendis cupiditate alias nemo
+                    quis et sint dolores doloribus voluptas praesentium, laudantium provident facere repellendus
+                    possimus ducimus cumque?
+                </p>
+            </div>
+        </div>
+
+        <div class="sidebar col">
+            <?php
+            $rec1->Sidebox();
+            $rec2->Sidebox();
+            $rec3->Sidebox();
+            ?>
+        </div>
+    </div> -->
+
+["Dish Type",["Appetizers & Snacks","Bread Recipes","Cake Recipes","Candy and Fudge","Casserole Recipes","Christmas Cookies","Cocktail Recipes","Main Dishes","Pasta Recipes","Pie Recipes","Sandwiches"]]
+    ["Meal Type",["Breakfast and Brunch","Desserts","Dinners","Lunch"]]
+    ["Diet and Health",["Diabetic","Gluten Free","High Fiber Recipes","Low Calorie"]]
+    ["World Cuisine",[Chinese,"Indian","Italian","Mexican"]]
+    ["Seasonal",["Baby Shower","Birthday","Christmas","Halloween"]]
+
+
+    <p>1 pound fresh prepared pizza dough</p>
+    <hr class="w-auto">
+    <p>6 ounces shredded mozzarella cheese</p>
+    <hr class="w-auto">
+    <p>3/4 cup of ricotta cheese</p>
+    <hr class="w-auto">
+    <p>1 large egg yolk</p>
+    <hr class="w-auto">
+    <p>1/2 teaspoon lemon zest</p>
+    <hr class="w-auto">
+    <p>2 finely grated garlic cloves</p>
+    <hr class="w-auto">
+    <p>1/2 teaspoon kosher salt</p>
+    <hr class="w-auto">
+    <p>1/4 teaspoon black pepper</p>
+    <hr class="w-auto">
+    <p>1 large egg</p>
+    <hr class="w-auto">
+    <p>1 teaspoon dried Italian seasoning</p>
+
+    <div class="pt-3">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>1 pound fresh prepared pizza dough</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>6 ounces shredded mozzarella cheese</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>3/4 cup of ricotta cheese</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>1 large egg yolk</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>1/2 teaspoon lemon zest</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>2 finely grated garlic cloves</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline m-0 w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>1/2 teaspoon kosher salt</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>1/4 teaspoon black pepper</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>1 large egg</p>
+                            </label>
+                        </div>
+                        <hr class="w-auto">
+                        <div class="form-check form-check-inline w-100 text-center">
+                            <input class="form-check-input" type="checkbox" id="chkStep1">
+                            <label class="form-check-label" for="chkStep1">
+                                <p>1 teaspoon dried Italian seasoning</p>
+                            </label>
+                        </div>
+                    </div>

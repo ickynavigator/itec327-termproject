@@ -1,0 +1,49 @@
+@import "./vars";
+
+@include sm {
+}
+
+@include md {
+}
+.leftDiv {
+  font-family: $sans-ser;
+  h1 {
+    font-weight: 650;
+  }
+  button {
+    border: none;
+    background: $clr-select !important;
+    color: $clr-white;
+    transition: 0.5s;
+    &:hover,
+    &:focus {
+      opacity: 0.75;
+    }
+  }
+}
+
+.rightDiv {
+  border-radius: 1rem;
+  color: $clr-white;
+  background: $clr-select;
+  form {
+    input,
+    textarea {
+      border-color: $clr-white;
+      background: transparent;
+      &[type="submit"] {
+        border: none;
+        // background: #fbc418 !important;
+        background: $clr-white !important;
+        transition: 0.5s;
+        &:hover,
+        &:focus {
+          opacity: 0.75;
+        }
+      }
+    }
+    #messageInp {
+      border-radius: 1.5rem;
+    }
+  }
+}

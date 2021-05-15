@@ -1,0 +1,134 @@
+@import "./vars";
+
+.banner {
+  display: flex;
+  border-radius: 2rem;
+  background: url("../../images/header.jpeg");
+  @include sm {
+    padding: 1rem;
+  }
+  @include md {
+    margin: 0 auto;
+    padding: 5rem;
+    @include htwt(auto, inherit);
+  }
+
+  .banner-text {
+    font-family: $sans-ser;
+    color: $clr-white;
+    h1 {
+      font-weight: 700;
+    }
+    a {
+      text-decoration: none;
+      color: $clr-white;
+      transition: 0.5s;
+      &:visited {
+        text-decoration: none;
+      }
+      &:focus,
+      &:hover {
+        padding: 0 1.25rem;
+        text-decoration: underline;
+      }
+    }
+    @include sm {
+      padding: 1rem;
+    }
+    @include md {
+      margin: auto 0;
+      width: 30vw;
+    }
+  }
+}
+
+.accordion-link {
+  font-family: $sans-ser;
+  list-style: none !important;
+  a {
+    text-decoration: none;
+    color: $clr-5;
+    transition: 0.5s ease-in-out;
+    &:visited {
+      text-decoration: none;
+    }
+    &:focus,
+    &:hover {
+      padding: 0 1.25rem;
+      text-decoration: underline;
+      color: $clr-select;
+    }
+  }
+}
+
+.rightDiv {
+  font-family: $sans-ser;
+  .search-bar {
+    border: none;
+    border-radius: 5px;
+    background: $clr-search;
+    .search-div {
+      margin: 0 !important;
+      .search-icon,
+      .search-text {
+        margin: 0 !important;
+        background: transparent;
+        border: none;
+      }
+      .search-btn {
+        transition: 0.5s;
+        &:hover {
+          color: $clr-white;
+          background: $clr-black;
+        }
+      }
+    }
+  }
+}
+
+.newsBox {
+  width: inherit;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: $clr-select;
+  @include sm {
+    padding: 2rem;
+  }
+  @include md {
+    padding: 3rem 12.5rem;
+  }
+
+  .newsText {
+    color: $clr-white;
+    padding: 1rem 0;
+  }
+
+  .newsInput {
+    input {
+      &[type="email"] {
+        border: 2px solid $clr-white;
+        background: transparent;
+        &::placeholder {
+          color: $clr-white;
+        }
+      }
+      &[type="submit"] {
+        background: $clr-white;
+        // background: #fbc418;
+        &:hover,
+        &:focus {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+}
+
+@include sm {
+  // width: 50%;
+}
+@include md {
+  // width: 35%;
+}

@@ -1,0 +1,49 @@
+/* CSS HEX */
+--cinnabar: #eb4a36ff;
+--dark-sienna: #3d0c11ff;
+--white: #ffffffff;
+
+/* CSS HSL */
+--cinnabar: hsla(7, 82%, 57%, 1);
+--dark-sienna: hsla(354, 67%, 14%, 1);
+--white: hsla(0, 0%, 100%, 1);
+
+/* SCSS HEX */
+$cinnabar: #eb4a36ff;
+$dark-sienna: #3d0c11ff;
+$white: #ffffffff;
+
+/* SCSS HSL */
+$cinnabar: hsla(7, 82%, 57%, 1);
+$dark-sienna: hsla(354, 67%, 14%, 1);
+$white: hsla(0, 0%, 100%, 1);
+
+/* SCSS RGB */
+$cinnabar: rgba(235, 74, 54, 1);
+$dark-sienna: rgba(61, 12, 17, 1);
+$white: rgba(255, 255, 255, 1);
+
+/* SCSS Gradient */
+$gradient-top: linear-gradient(0deg, #eb4a36ff, #3d0c11ff, #ffffffff);
+$gradient-right: linear-gradient(90deg, #eb4a36ff, #3d0c11ff, #ffffffff);
+$gradient-bottom: linear-gradient(180deg, #eb4a36ff, #3d0c11ff, #ffffffff);
+$gradient-left: linear-gradient(270deg, #eb4a36ff, #3d0c11ff, #ffffffff);
+$gradient-top-right: linear-gradient(45deg, #eb4a36ff, #3d0c11ff, #ffffffff);
+$gradient-bottom-right: linear-gradient(135deg, #eb4a36ff, #3d0c11ff, #ffffffff);
+$gradient-top-left: linear-gradient(225deg, #eb4a36ff, #3d0c11ff, #ffffffff);
+$gradient-bottom-left: linear-gradient(315deg, #eb4a36ff, #3d0c11ff, #ffffffff);
+$gradient-radial: radial-gradient(#eb4a36ff, #3d0c11ff, #ffffffff);
+
+/* CSV */
+eb4a36,3d0c11,ffffff
+
+/* Array */
+["eb4a36","3d0c11","ffffff"]
+
+/* Object */
+{"Cinnabar":"eb4a36","Dark Sienna":"3d0c11","White":"ffffff"}
+
+/* Extended Array */
+[{"name":"Cinnabar","hex":"eb4a36","rgb":[235,74,54],"cmyk":[0,69,77,8],"hsb":[7,77,92],"hsl":[7,82,57],"lab":[55,61,46]},{"name":"Dark Sienna","hex":"3d0c11","rgb":[61,12,17],"cmyk":[0,80,72,76],"hsb":[354,80,24],"hsl":[354,67,14],"lab":[11,24,10]},{"name":"White","hex":"ffffff","rgb":[255,255,255],"cmyk":[0,0,0,0],"hsb":[0,0,100],"hsl":[0,0,100],"lab":[100,0,0]}]
+
+https://coolors.co/eb4a36-3d0c11-ffffff

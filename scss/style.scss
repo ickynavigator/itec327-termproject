@@ -1,0 +1,106 @@
+@import "./vars";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  @include sm {
+  }
+
+  @include md {
+    padding: 0 5rem;
+  }
+}
+
+.navbar {
+  font-family: $sans-ser;
+  padding: 1rem 0;
+
+  .active {
+    color: $clr-select !important;
+  }
+
+  &-brand {
+    font-family: $cursive;
+    color: $clr-5 !important;
+  }
+
+  a {
+    color: $clr-5 !important;
+    @include nav-link();
+    &:hover:not(.navbar-brand),
+    &:focus:not(.navbar-brand) {
+      color: $clr-select !important;
+    }
+  }
+
+  .dropdown {
+    float: left;
+
+    .dropdown-toggle {
+      @include nav-link();
+      border: none;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .dropdown-menu {
+      a {
+        @include nav-link();
+        @include hover-focus-clr();
+      }
+    }
+  }
+}
+
+.recipe-card {
+  color: $clr-black;
+  text-decoration: none;
+  border: none;
+  img {
+    width: inherit;
+    height: 7rem;
+    background: $clr-select;
+    border-radius: 1rem;
+  }
+  &:hover {
+    color: $clr-black;
+    text-decoration: none;
+    img {
+      opacity: 0.75;
+    }
+  }
+}
+
+footer {
+  .smicon {
+    @include htwt(2rem, 2rem);
+    justify-content: center;
+    align-items: center;
+    border: 2px solid;
+
+    a {
+      text-align: center;
+      text-decoration: none;
+      &:visited {
+        text-decoration: none;
+      }
+    }
+
+    @include borderIcon("fa", $faClr);
+    @include borderIcon("ig", $igClr);
+    @include borderIcon("tw", $twClr);
+    @include borderIcon("gh", $ghClr);
+
+    .fab {
+      font-size: 1rem;
+    }
+  }
+}

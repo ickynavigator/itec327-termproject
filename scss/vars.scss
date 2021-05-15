@@ -1,0 +1,109 @@
+// fonts
+// @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+// <link rel="preconnect" href="https://fonts.gstatic.com">
+// <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+// Variables
+$faClr: #3b5998;
+$igClr: #8a3ab9;
+$twClr: #00acee;
+$ghClr: #24292e;
+
+$clr-1: #f5e6e8ff;
+$clr-2: #d5c6e0ff;
+$clr-3: #aaa1c8ff;
+$clr-4: #967aa1ff;
+$clr-5: #2d0320ff;
+
+// $clr-select: #eb4a36;
+$clr-select: #147efb;
+$clr-white: #ffffff;
+$clr-black: #000000;
+$clr-grey: #808080;
+$clr-search: #e6e6e6;
+// $lg-2-3-2: linear-gradient(90deg, $clr-2 0%, $clr-3 50%, $clr-2 100%);
+
+$footerHeight: 2rem;
+$sans-ser: "Montserrat", sans-serif;
+$cursive: "Leckerli One", cursive;
+$screen-sm-min: 375px;
+$screen-md-min: 768px;
+
+// Mixins
+@mixin hover-focus-clr($clr: $clr-3, $foc: false) {
+  @if $foc {
+    &:hover {
+      background-color: $clr;
+    }
+  } @else {
+    &:hover,
+    &:focus {
+      background-color: $clr;
+    }
+  }
+}
+
+@mixin nav-link() {
+  float: left;
+  font-size: 1rem;
+  color: $clr-5 !important;
+  padding: 0.875rem 1rem;
+  text-decoration: none;
+  margin: 0;
+}
+
+@mixin htwt($ht, $wt: false) {
+  @if $wt {
+    height: $ht;
+    width: $wt;
+  } @else {
+    height: $ht;
+    width: $ht;
+  }
+}
+
+@mixin borderIcon($selector, $color) {
+  &-#{$selector} {
+    border-color: $color;
+    a {
+      color: $color;
+      transition: 0.5s;
+      &:visited {
+        color: $color;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $color;
+      i {
+        color: $clr-white !important;
+      }
+    }
+  }
+}
+
+// @mixin themeClr($attr, $light, $dark: false) {
+//   @if $dark {
+//     @media (prefers-color-scheme: light) {
+//       $attr: $light;
+//     }
+//     @media (prefers-color-scheme: dark) {
+//       $attr: $dark;
+//     }
+//   } @else {
+//     $attr: $light;
+//   }
+// }
+
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}

@@ -1,0 +1,41 @@
+.main-div {
+  font-family: "Montserrat", sans-serif;
+}
+
+.main-div .search-bar {
+  border: none;
+  border-radius: 5px;
+  background: #e6e6e6;
+}
+
+.main-div .search-bar .search-div {
+  margin: 0 !important;
+}
+
+.main-div .search-bar .search-div .search-icon,
+.main-div .search-bar .search-div .search-text {
+  margin: 0 !important;
+  background: transparent;
+  border: none;
+}
+
+.main-div .search-bar .search-div .search-btn {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.main-div .search-bar .search-div .search-btn:hover {
+  color: #ffffff;
+  background: #000000;
+}
+
+.main-div .recipe-card {
+  border: none;
+}
+
+.main-div .recipe-card img {
+  width: inherit;
+  height: 7rem;
+  background: #147efb;
+  border-radius: 10px;
+}
