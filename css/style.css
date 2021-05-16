@@ -24,7 +24,7 @@ body {
 }
 
 .navbar .active {
-  color: #147efb !important;
+  color: #eb4a36 !important;
 }
 
 .navbar-brand {
@@ -43,7 +43,17 @@ body {
 }
 
 .navbar a:hover:not(.navbar-brand), .navbar a:focus:not(.navbar-brand) {
-  color: #147efb !important;
+  color: #eb4a36 !important;
+}
+
+.navbar a[role="button"] {
+  background-color: #eb4a36;
+  text-decoration: none;
+  color: #ffffff !important;
+}
+
+.navbar a[role="button"]:hover, .navbar a[role="button"]:focus {
+  color: #2d0320ff !important;
 }
 
 .navbar .dropdown {
@@ -84,7 +94,7 @@ body {
 .recipe-card img {
   width: inherit;
   height: 7rem;
-  background: #147efb;
+  background: #eb4a36;
   border-radius: 1rem;
 }
 

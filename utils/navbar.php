@@ -39,8 +39,8 @@ function navPrint($currPage, $navArr, $dropArr)
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+            <ul class="nav navbar-nav">
                 <?php
                 navPrint(
                     $pageName,
@@ -57,7 +57,12 @@ function navPrint($currPage, $navArr, $dropArr)
                 );
                 ?>
             </ul>
+            <ul class="nav navbar-nav ml-auto align-items-center">
+                <li><a href="./login.php">Sign In</a></li>
+                <li><a class="btn rounded-pill py-2" href="./signup.php" role="button">Sign Up</a></li>
+            </ul>
         </div>
+
 
     </div>
 </nav>

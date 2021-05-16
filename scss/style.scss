@@ -39,6 +39,15 @@ body {
     &:focus:not(.navbar-brand) {
       color: $clr-select !important;
     }
+    &[role="button"] {
+      background-color: $clr-select;
+      text-decoration: none;
+      color: $clr-white !important;
+      &:hover,
+      &:focus {
+        color: $clr-5 !important;
+      }
+    }
   }
 
   .dropdown {

@@ -1,87 +1,77 @@
 <?php
+$recipeCategory = [
+    ["Dish Type", ["Appetizers & Snacks", "Bread Recipes", "Cake Recipes", "Candy and Fudge", "Casserole Recipes", "Christmas Cookies", "Cocktail Recipes", "Main Dishes", "Pasta Recipes", "Pie Recipes", "Sandwiches"]],
+    ["Meal Type", ["Breakfast and Brunch", "Desserts", "Dinners", "Lunch"]],
+    ["Diet and Health", ["Diabetic", "Gluten Free", "High Fiber Recipes", "Low Calorie"]],
+    ["World Cuisine", ["Chinese", "Indian", "Italian", "Mexican"]],
+    ["Seasonal", ["Baby Shower", "Birthday", "Christmas", "Halloween"]]
+];
+$dummy = "Labour, of evaluated would he the a the our what is in the arduous sides behavioural is which the have didn't kicked records the it framework by the for traveler sure the can most well her. Entered have break himself cheek, and activity, for bit of text.";
+
+
+$sampleRecipe = new Recipe(
+    "1",
+    "White calzones with marinara sauce",
+    ["Dinner", "Casserole", "Party", "Meat"],
+    "Supermarket brands of ricotta contain stabilizers, which can give the cheese a gummy texture when baked. Check the label and choose ricotta made with as few ingredients as possible.",
+    ["./images/sample.jpeg"],
+    3,
+    ["1 pound fresh prepared pizza dough", "6 ounces shredded mozzarella cheese", "3/4 cup of ricotta cheese", "1 large egg yolk", "1/2 teaspoon lemon zest", "2 finely grated garlic cloves", "1/2 teaspoon kosher salt", "1/4 teaspoon black pepper", "1 large egg", "1 teaspoon dried Italian seasoning"],
+    [$dummy, $dummy, $dummy, $dummy, $dummy],
+    20,
+    50,
+    4
+);
+?>
+
+<?php
 class Recipe
 {
     private $Recipeid = "";
-    private $RecipeName = 0;
-    private $rating = 0;
+    public $RecipeName = "";
     private $keywords = [""];
     private $description = "";
     private $pictures = [];
-    function __construct($Recipeid, $RecipeName, $keywords, $description, $pictures, $rating)
-    {
+    private $rating = 0;
+    private $ingredients = [];
+    private $steps = [];
+    private $ActiveTime = 0;
+    private $TotalTime = 0;
+    private $Yield = 0;
+
+    function __construct(
+        $Recipeid,
+        $RecipeName,
+        $keywords,
+        $description,
+        $pictures,
+        $rating,
+        $ingredients,
+        $steps,
+        $ActiveTime,
+        $TotalTime,
+        $Yield
+    ) {
         $this->Recipeid = $Recipeid;
         $this->RecipeName = $RecipeName;
         $this->keywords = $keywords;
         $this->description = $description;
         $this->pictures = $pictures;
         $this->rating = $rating;
+        $this->ingredients = $ingredients;
+        $this->steps = $steps;
+        $this->ActiveTime = $ActiveTime;
+        $this->TotalTime = $TotalTime;
+        $this->Yield = $Yield;
     }
-    function SideBox()
-    {
-        $id = $this->Recipeid;
-        $nm = $this->RecipeName;
-        $pic = $this->pictures[0];
-        $desc = $this->description;
-        $keyWord = implode(", ", $this->keywords);
 
-        // echo <<<EOD
-        // <div class="sidebar-box" id="recipe-${id}">
-        //     <h1 id="title">${nm}</h1>
-        //     <img id="image" src="${pic}" alt="${nm}">
-        //     <p id="description">${keyWord}</p>
-        //     <p id="description">${desc}</p>
-        // </div>
-        // EOD;
-
-        echo <<<EOD
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                <img src="${pic}" alt="${nm}" style="max-height: inherit; max-width: inherit;">
-                </div>
-                <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">${nm}</h5>
-                    <p class="card-text">${desc}</p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                </div>
-                </div>
-            </div>
-        </div>
-        EOD;
-    }
-    function StarRank()
-    {
-        // echo "\n\t<div>\n\t\t";
-        // echo implode("\n\t\t", starClasses($this->rating));
-        // echo "\n\t</div>\n";
-        return "<div>" . implode("", starClasses($this->rating)) . "</div>";
-    }
     function CardBox()
     {
         $id = $this->Recipeid;
         $nm = $this->RecipeName;
         $pic = $this->pictures[0];
-        $desc = $this->description;
-        $keyWord = implode(", ", $this->keywords);
         $stars = $this->StarRank();
 
-
-        // echo <<<EOD
-        // <div class="card" style="width: 18rem;" id="recipe-${id}">
-        //     <img src="${pic}" class="card-img-top" alt="${nm}">
-        //     <div class="card-header">${keyWord}</div>
-        //     <h5 class="card-title">${nm}</h5>
-        //     <div class="card-body">
-        //         <p class="card-text">${desc}</p>
-        //         <a href="./recipe/${id}" class="btn btn-primary">View Recipe</a>
-        //     </div>
-        // </div>
-        // EOD;
-
-        // <a href="#" class="btn btn-primary">Go somewhere</a>
         echo <<<EOD
         <a href="./recipe.php" class="card recipe-card py-3" id="recipe-$id">
             <!-- <img src="$pic" class="card-img-top" alt="$nm"> -->
@@ -93,19 +83,142 @@ class Recipe
         </a>
         EOD;
     }
+    function StarRank()
+    {
+        $stars = $this->rating;
+
+        return "<div>" . implode(
+            "",
+            array_map(
+                function ($val, $keys) use ($stars) {
+                    $cls =
+                        (($stars >= $keys + 1) ? 'fas fa-star' : //full star
+                            (($stars >= $keys + .5) ? 'fas fa-star-half-alt' : //half star
+                                'far fa-star')); //empty star
+                    return  "<i class='$cls' style='color: #FFD700;'></i>";
+                },
+                range(1, 5),
+                range(1, 5)
+            )
+        ) . "</div>";
+    }
+
+    // printers
+    function ingredientPrint()
+    {
+        $ing = $this->ingredients;
+        $ingCnt = sizeof($ing);
+
+        $ingTxt = implode("", array_map(function ($foo, $i) use ($ingCnt) {
+            $bar = ($i != $ingCnt - 1) ? "<hr class='w-auto'>" : "";
+            return <<<EOD
+                <div class="form-check form-check-inline w-100">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox">
+                    <span>$foo</span>
+                    </label>
+                </div>
+                $bar
+            EOD;
+        }, $ing, array_keys($ing)));
+
+        echo <<<EOD
+            <div class="pb-3">
+                <h3>Ingredients</h3>
+                <hr class="w-auto">
+                <div>
+                    $ingTxt
+                </div>
+            </div>
+        EOD;
+    }
+    function tagPrint()
+    {
+        $tag = $this->keywords;
+
+        $tagTxt = implode("\n", array_map(function ($foo) {
+            return '<a class="btn btn-primary my-2" href="#" role="button">' . $foo . '</a>';
+        }, $tag));
+
+        echo <<<EOD
+            <div>
+                <h3>Tags</h3>
+                <div>
+                    $tagTxt
+                </div>
+            </div>
+        EOD;
+    }
+    function infoPrint()
+    {
+        $img = $this->picture[0];
+        $nm = $this->RecipeName;
+        $desc = $this->description;
+        $timeArr = [$this->ActiveTime . " mins", $this->TotalTime . " mins", "Serves " . $this->Yield];
+        $stars = $this->StarRank();
+
+        $timetxt = implode("", array_map(function ($foo, $bar) {
+            return <<<EOD
+                <div class="col-4">
+                    <i class="$bar[0]"></i>
+                    <h4>$bar[1]</h4>
+                    <h6 class="text-muted">$foo</h6>
+                </div>
+            EOD;
+        }, $timeArr, [["far fa-clock", "Active Time"], ["fas fa-history", "Total Time"], ["fas fa-user-friends", "Yield"]]));
+
+        echo <<<EOD
+            <div class="col-auto d-flex justify-content-center align-items-center">
+                <div class="test-image"></div>
+                <!-- <img src="$img" alt="$nm"> -->
+            </div>
+            <div class="col-auto pt-3 d-flex justify-content-center align-items-center text-center">
+                <div>
+                    <h1>$nm</h1>
+                    <p>$desc</p>
+                    $stars
+                    <hr class="w-100">
+                    <div class="row w-100 text-center">
+                        $timetxt
+                    </div>
+                    <hr class="w-100">
+                </div>
+            </div>
+        EOD;
+    }
+    function stepPrint()
+    {
+        $stepsArr = $this->steps;
+        $stepsArrTxt = implode("\n", array_map(function ($foo, $bar) {
+            $i = $bar + 1;
+            return <<<EOD
+                <div class="form-check form-check-inline w-100">
+                    <input class="form-check-input" type="checkbox" id="chkStep$i">
+                    <label class="form-check-label" for="chkStep$i">$i. STEP</label>
+                    <p>$foo</p>
+                </div>
+                <hr class="w-auto">
+            EOD;
+        }, $stepsArr, array_keys($stepsArr)));
+
+        echo <<<EOD
+            <h3>How to Make It</h3>
+            <div>
+                <hr class='w-auto'>
+                $stepsArrTxt
+            </div>
+        EOD;
+    }
+
+    // getters
+    function getName()
+    {
+        return $this->RecipeName;
+    }
 }
 
-function starClasses($foo, $full = false)
-{
-    return array_map(function ($val, $keys) use ($foo, $full) {
-        $cls =
-            (($foo >= $keys + 1) ? 'fas fa-star' : //full star
-                (($foo >= $keys + .5) ? 'fas fa-star-half-alt' : //half star
-                    'far fa-star')); //empty star
-        return ($full != false) ? "$cls" : "<i class='$cls' style='color: #FFD700;'></i>";
-    }, range(1, 5), range(1, 5));
-}
 
+// functions
 function AccordionConst($arr)
 {
     echo '<div class="accordion accordion-flush" id="accordionFlushExample">';
@@ -131,18 +244,17 @@ function AccordionConst($arr)
     }
     echo '</div>';
 }
+function IconPrint($arr)
+{
+    // [...["icon Name", "icon class", "icon link"]] : arr
+    foreach ($arr as $val) {
+        echo <<<EOD
+        <div class="col smicon smicon-$val[0] rounded-pill d-inline-flex mx-1">
+            <a href="$val[2]" class="d-inline-flex">
+                <i class="$val[1]"></i>
+            </a>
+        </div>
+        EOD;
+    }
+}
 ?>
-
-<?php
-$rec1 = new Recipe("1", "first", ["one", "first"], "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, corporis!", ["./images/sample.jpeg"], 3);
-$rec2 = new Recipe("2", "second", ["two", "second"], "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, corporis!", ["./images/sample.jpeg"], 5);
-$rec3 = new Recipe("3", "third", ["three", "third"], "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, corporis!", ["./images/sample.jpeg"], 2.5);
-$recipeCategory = [
-    ["Dish Type", ["Appetizers & Snacks", "Bread Recipes", "Cake Recipes", "Candy and Fudge", "Casserole Recipes", "Christmas Cookies", "Cocktail Recipes", "Main Dishes", "Pasta Recipes", "Pie Recipes", "Sandwiches"]],
-    ["Meal Type", ["Breakfast and Brunch", "Desserts", "Dinners", "Lunch"]],
-    ["Diet and Health", ["Diabetic", "Gluten Free", "High Fiber Recipes", "Low Calorie"]],
-    ["World Cuisine", ["Chinese", "Indian", "Italian", "Mexican"]],
-    ["Seasonal", ["Baby Shower", "Birthday", "Christmas", "Halloween"]]
-];
-?>
-<!--  -->

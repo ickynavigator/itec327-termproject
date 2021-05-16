@@ -78,7 +78,7 @@
 .accordion-link a:focus, .accordion-link a:hover {
   padding: 0 1.25rem;
   text-decoration: underline;
-  color: #147efb;
+  color: #eb4a36;
 }
 
 .rightDiv {
@@ -122,7 +122,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   border-radius: 20px;
-  background: #147efb;
+  background: #eb4a36;
 }
 
 @media (min-width: 375px) {

@@ -56,9 +56,9 @@
                 <div class="row row-cols-3 g-2 g-lg-3 section">
                     <br>
                     <?php
-                    for ($i = 1; $i <= 15; $i++) {
+                    for ($i = 1; $i <= 24; $i++) {
                         echo "<div class='col'>";
-                        $rec1->Cardbox();
+                        $sampleRecipe->Cardbox();
                         echo "</div>";
                     }
                     ?>

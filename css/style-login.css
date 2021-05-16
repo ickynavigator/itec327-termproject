@@ -10,7 +10,7 @@ body {
 
 .leftDiv form input[type="submit"] {
   border: none;
-  background: #147efb !important;
+  background: #eb4a36 !important;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -22,12 +22,12 @@ body {
 .leftDiv form input:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
-  border-color: #147efb;
+  border-color: #eb4a36;
 }
 
 .rightDiv {
   border-radius: 1.5rem;
-  background: #147efb;
+  background: #eb4a36;
   color: #ffffff;
 }
 

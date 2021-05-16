@@ -9,26 +9,14 @@
         </div>
         <div class="col-auto row ms-lg-auto">
             <div class="row-4 float-end">
-                <div class="col smicon smicon-fa rounded-pill d-inline-flex">
-                    <a href="#" class="d-inline-flex">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                </div>
-                <div class="col smicon smicon-ig rounded-pill d-inline-flex">
-                    <a href="#" class="d-inline-flex">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-                <div class="col smicon smicon-tw rounded-pill d-inline-flex">
-                    <a href="#" class="d-inline-flex">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                </div>
-                <div class="col smicon smicon-gh rounded-pill d-inline-flex">
-                    <a href="#" class="d-inline-flex">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
+                <?php
+                IconPrint([
+                    ["fa", "fab fa-facebook", "#"],
+                    ["ig", "fab fa-instagram", "#"],
+                    ["tw", "fab fa-twitter", "#"],
+                    ["gh", "fab fa-github", "#"]
+                ])
+                ?>
             </div>
         </div>
     </div>
@@ -49,4 +37,4 @@
 </script>
 
 <!-- My scripts  -->
-<script src="./js/index.js"></script>
+<script src="./js/index.min.js"></script>

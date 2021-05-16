@@ -30,11 +30,10 @@
             <?php
             for ($i = 1; $i <= 15; $i++) {
                 echo "<div class='col'>";
-                $rec1->Cardbox();
+                $sampleRecipe->Cardbox();
                 echo "</div>";
             }
             ?>
-
         </div>
     </div>
     <?php include("./utils/footer.php"); ?>

@@ -2,3 +2,5 @@
 /vendor/
 snippets.txt
 /a_misc/
+
+git add . && git status && git commit --allow-empty -m "set up recipe page and changed colors back" && git pushall
