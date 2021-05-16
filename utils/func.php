@@ -137,7 +137,7 @@ class Recipe
         $tag = $this->keywords;
 
         $tagTxt = implode("\n", array_map(function ($foo) {
-            return '<a class="btn btn-primary my-2" href="#" role="button">' . $foo . '</a>';
+            return '<a class="btn btn-primary my-2 recipe-tag rounded-pill" href="#" role="button">' . $foo . '</a>';
         }, $tag));
 
         echo <<<EOD

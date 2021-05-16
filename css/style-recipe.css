@@ -8,3 +8,13 @@
 input[type="checkbox"]:checked ~ * {
   color: #808080 !important;
 }
+
+.recipe-tag {
+  background-color: #eb4a36;
+  border: none;
+}
+
+.recipe-tag:hover, .recipe-tag:focus {
+  background-color: #eb4a36;
+  opacity: 0.6;
+}

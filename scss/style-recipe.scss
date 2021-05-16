@@ -14,3 +14,13 @@ input[type="checkbox"]:checked {
     color: $clr-grey !important;
   }
 }
+
+.recipe-tag {
+  background-color: $clr-select;
+  border: none;
+  &:hover,
+  &:focus {
+    background-color: $clr-select;
+    opacity: 0.6;
+  }
+}
