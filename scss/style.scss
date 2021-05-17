@@ -72,7 +72,7 @@ body {
 .recipe-card {
   color: $clr-black;
   text-decoration: none;
-  border: none;
+  border: 1px solid $clr-select;
   img {
     width: inherit;
     height: 7rem;

@@ -5,20 +5,26 @@ $uri = parse_url($_SERVER['REQUEST_URI']);
 parse_str($uri['query'], $params);
 
 $res = recQuery($params['id']);
-console_log($res);
-$CurrRecipe = new Recipe(
-    $res["id"],
-    $res["recipe_name"],
-    $res["keywords"],
-    $res["rating"],
-    $res["description"],
-    $res["pictures"],
-    $res["ingredients"],
-    $res["steps"],
-    $res["timeToPrep"],
-    $res["timeToCook"],
-    $res["serving"]
-);
+if ($res !== "error") {
+    $CurrRecipe = new Recipe(
+        $res["id"],
+        $res["recipe_name"],
+        $res["keywords"],
+        $res["rating"],
+        $res["description"],
+        $res["pictures"],
+        $res["ingredients"],
+        $res["steps"],
+        $res["timeToPrep"],
+        $res["timeToCook"],
+        $res["serving"]
+    );
+} else {
+    header("HTTP/1.0 404 Not Found");
+    echo "<h1>404 Not Found</h1>";
+    echo "The page that you have requested could not be found.";
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,13 +58,13 @@ $CurrRecipe = new Recipe(
         </div>
     </div>
 
-    <div class="container-fluid py-5 h-25 w-100">
+    <div class="container-fluid py-5">
         <h3>Other Recipes You May Like</h3>
         <div class="row row-cols-2 row-cols-md-4 g-2 g-lg-3 section">
             <?php
             for ($i = 1; $i <= 8; $i++) {
                 echo "<div class='col'>";
-                $sampleRecipe->Cardbox();
+                $CurrRecipe->Cardbox();
                 echo "</div>";
             }
             ?>

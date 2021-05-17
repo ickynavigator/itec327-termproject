@@ -88,7 +88,7 @@ body {
 .recipe-card {
   color: #000000;
   text-decoration: none;
-  border: none;
+  border: 1px solid #eb4a36;
 }
 
 .recipe-card img {

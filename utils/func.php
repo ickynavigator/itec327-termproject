@@ -73,13 +73,13 @@ class Recipe
         $pic = $this->pictures[0];
         $stars = $this->StarRank();
 
+        // <img src="" class="card-img-top" alt="">
         echo <<<EOD
-        <a href="./recipe.php" class="card recipe-card py-3" id="recipe-$id">
-            <!-- <img src="$pic" class="card-img-top" alt="$nm"> -->
-            <img src="" class="card-img-top" alt="">
+        <a href="./recipe?id=$id" class="card recipe-card py-3" id="recipe-$id">
+            <img src="$pic" class="card-img-top" alt="$nm">
             <div class="card-body">
+                $stars
                 <h5 class="card-title">$nm</h5>
-                <!--$stars-->
             </div>
         </a>
         EOD;
@@ -112,7 +112,7 @@ class Recipe
 
         $ingTxt = implode("", array_map(function ($foo, $i) use ($ingCnt) {
             $bar = ($i != $ingCnt - 1) ? "<hr class='w-auto'>" : "";
-            $amount = (!is_float($foo[0])) ? $foo[0] : float2rat($foo[0]);
+            $amount = (intval($foo[0]) == $foo[0]) ? intval($foo[0]) : float2rat($foo[0]);
             $item = $foo[1];
             return <<<EOD
                 <div class="form-check form-check-inline w-100">
@@ -197,7 +197,7 @@ class Recipe
             return <<<EOD
                 <div class="form-check form-check-inline w-100">
                     <input class="form-check-input" type="checkbox" id="chkStep$i">
-                    <label class="form-check-label" for="chkStep$i">$i. STEP</label>
+                    <label class="form-check-label" for="chkStep$i">STEP $i</label>
                     <p>$foo</p>
                 </div>
                 <hr class="w-auto">

@@ -70,9 +70,9 @@ function AccordionConst($arr)
                     </div>
                 </div>
             </div>
-            <div class="col-md-9 rightDiv">
+            <div class="col-md-9 rightDiv mb-3">
                 <form class="d-flex search-bar">
-                    <div class="input-group mb-3 search-div">
+                    <div class="input-group search-div">
                         <span class="input-group-text search-icon" id="basic-addon1">
                             <i class="fas fa-search"></i>
                         </span>
@@ -82,7 +82,7 @@ function AccordionConst($arr)
                         </button>
                     </div>
                 </form>
-                <div class="row row-cols-3 g-2 g-lg-3 section">
+                <div class="row row-cols-3 g-2 g-lg-3 mt-1 section">
                     <br>
                     <?php
                     for ($i = 1; $i <= 24; $i++) {

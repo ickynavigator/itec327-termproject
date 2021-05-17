@@ -34,7 +34,7 @@ function multiQuery($item, $query)
     $res = $GLOBALS["conn"]->query($query);
     if ($res->num_rows > 0) {
         while ($row = $res->fetch_assoc()) {
-            if (sizeof($item) < 0)
+            if (sizeof($item) < 2)
                 array_push($arr, $row[$item[0]]);
             else
                 array_push($arr, [$row[$item[0]], $row[$item[1]]]);
@@ -60,19 +60,18 @@ function recQuery($id)
         $row = $result->fetch_assoc();
         $arr["id"] = $row["id"];
         $arr["recipe_name"] = $row["recipe_name"];
-        $arr["rating"] = $row["rating"];
+        $arr["rating"] = intval($row["rating"]);
         $arr["description"] = $row["description"];
         $arr["timeToPrep"] = $row["timeToPrep"];
         $arr["timeToCook"] = $row["timeToCook"];
         $arr["serving"] = $row["serving"];
     } else {
-        echo "0 results";
         return "error";
     }
-    $arr["steps"] = multiQuery("stepTxt", $query2);
-    $arr["keywords"] = multiQuery("tag", $query3);
-    $arr["pictures"] = multiQuery("file", $query4);
-    $arr["ingredients"] = multiQuery("amount", $query5, "ingredient_name");
+    $arr["steps"] = multiQuery(["stepTxt"], $query2);
+    $arr["keywords"] = multiQuery(["tag"], $query3);
+    $arr["pictures"] = multiQuery(["file"], $query4);
+    $arr["ingredients"] = multiQuery(["amount", "ingredient_name"], $query5);
 
     return $arr;
 }

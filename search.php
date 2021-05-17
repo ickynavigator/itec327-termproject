@@ -25,7 +25,7 @@
                 </button>
             </div>
         </form>
-        <div class="row row-cols-sm-2 row-cols-md-4 g-2 g-lg-3 section">
+        <div class="row row-cols-sm-2 row-cols-md-4 mt-1 g-2 g-lg-3 section">
             <br>
             <?php
             for ($i = 1; $i <= 15; $i++) {
