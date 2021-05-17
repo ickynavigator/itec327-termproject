@@ -37,7 +37,6 @@ class Recipe
     private $serving = 0;
     private $steps = [""];
 
-    private $classification = [""];
     private $ingredients = [[0, ""]];
     private $pictures = [];
 

@@ -36,6 +36,7 @@ CREATE TABLE recipe_ingredients_list (
     id INT NOT NULL PRIMARY KEY,
     recipe_id INT NOT NULL,
     ingredient_id INT NOT NULL,
+    ingredient_desc VARCHAR(256),
     amount DECIMAL(5, 2),
     FOREIGN KEY (recipe_id) REFERENCES recipe_table(id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredient_table(id)

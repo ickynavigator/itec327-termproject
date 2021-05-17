@@ -1,8 +1,24 @@
-<?php include("./utils/func.php");
-?>
-<?php include("./utils/config.php");
+<?php
+include("./utils/config.php");
+include("./utils/func.php");
+$uri = parse_url($_SERVER['REQUEST_URI']);
+parse_str($uri['query'], $params);
 
-$CurrRecipe = $sampleRecipe;
+$res = recQuery($params['id']);
+console_log($res);
+$CurrRecipe = new Recipe(
+    $res["id"],
+    $res["recipe_name"],
+    $res["keywords"],
+    $res["rating"],
+    $res["description"],
+    $res["pictures"],
+    $res["ingredients"],
+    $res["steps"],
+    $res["timeToPrep"],
+    $res["timeToCook"],
+    $res["serving"]
+);
 ?>
 <!DOCTYPE html>
 <html lang="en">
