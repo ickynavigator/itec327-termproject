@@ -13,13 +13,13 @@ $sampleRecipe = new Recipe(
     "1",
     "White calzones with marinara sauce",
     ["Dinner", "Casserole", "Party", "Meat"],
+    3,
     "Supermarket brands of ricotta contain stabilizers, which can give the cheese a gummy texture when baked. Check the label and choose ricotta made with as few ingredients as possible.",
     ["./images/sample.jpeg"],
-    3,
-    ["1 pound fresh prepared pizza dough", "6 ounces shredded mozzarella cheese", "3/4 cup of ricotta cheese", "1 large egg yolk", "1/2 teaspoon lemon zest", "2 finely grated garlic cloves", "1/2 teaspoon kosher salt", "1/4 teaspoon black pepper", "1 large egg", "1 teaspoon dried Italian seasoning"],
+    [[1, "pound fresh prepared pizza dough"], [6, "ounces shredded mozzarella cheese"], [3 / 4, "cup of ricotta cheese"], [1, "large egg yolk"], [1 / 2, "teaspoon lemon zest"], [2, "finely grated garlic cloves"], [1 / 2, "teaspoon kosher salt"], [1 / 4, "teaspoon black pepper"], [1, "large egg"], [1, "teaspoon dried Italian seasoning"]],
     [$dummy, $dummy, $dummy, $dummy, $dummy],
     20,
-    50,
+    30,
     4
 );
 ?>
@@ -28,44 +28,46 @@ $sampleRecipe = new Recipe(
 class Recipe
 {
     private $Recipeid = "";
-    public $RecipeName = "";
+    private $RecipeName = "";
     private $keywords = [""];
-    private $description = "";
-    private $pictures = [];
     private $rating = 0;
-    private $ingredients = [];
-    private $steps = [];
-    private $ActiveTime = 0;
-    private $TotalTime = 0;
-    private $Yield = 0;
+    private $description = "";
+    private $cookTime = 0;
+    private $prepTime = 0;
+    private $serving = 0;
+    private $steps = [""];
 
-    function __construct(
+    private $classification = [""];
+    private $ingredients = [[0, ""]];
+    private $pictures = [];
+
+    public function __construct(
         $Recipeid,
         $RecipeName,
         $keywords,
+        $rating,
         $description,
         $pictures,
-        $rating,
         $ingredients,
         $steps,
-        $ActiveTime,
-        $TotalTime,
-        $Yield
+        $prepTime,
+        $cookTime,
+        $serving
     ) {
         $this->Recipeid = $Recipeid;
         $this->RecipeName = $RecipeName;
         $this->keywords = $keywords;
+        $this->rating = $rating;
         $this->description = $description;
         $this->pictures = $pictures;
-        $this->rating = $rating;
         $this->ingredients = $ingredients;
         $this->steps = $steps;
-        $this->ActiveTime = $ActiveTime;
-        $this->TotalTime = $TotalTime;
-        $this->Yield = $Yield;
+        $this->prepTime = $prepTime;
+        $this->cookTime = $cookTime;
+        $this->serving = $serving;
     }
 
-    function CardBox()
+    public function CardBox()
     {
         $id = $this->Recipeid;
         $nm = $this->RecipeName;
@@ -83,7 +85,7 @@ class Recipe
         </a>
         EOD;
     }
-    function StarRank()
+    public function StarRank()
     {
         $stars = $this->rating;
 
@@ -104,18 +106,20 @@ class Recipe
     }
 
     // printers
-    function ingredientPrint()
+    public function ingredientPrint()
     {
         $ing = $this->ingredients;
         $ingCnt = sizeof($ing);
 
         $ingTxt = implode("", array_map(function ($foo, $i) use ($ingCnt) {
             $bar = ($i != $ingCnt - 1) ? "<hr class='w-auto'>" : "";
+            $amount = (!is_float($foo[0])) ? $foo[0] : float2rat($foo[0]);
+            $item = $foo[1];
             return <<<EOD
                 <div class="form-check form-check-inline w-100">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox">
-                    <span>$foo</span>
+                    <span>$amount $item</span>
                     </label>
                 </div>
                 $bar
@@ -132,7 +136,7 @@ class Recipe
             </div>
         EOD;
     }
-    function tagPrint()
+    public function tagPrint()
     {
         $tag = $this->keywords;
 
@@ -149,12 +153,12 @@ class Recipe
             </div>
         EOD;
     }
-    function infoPrint()
+    public function infoPrint()
     {
         $img = $this->picture[0];
         $nm = $this->RecipeName;
         $desc = $this->description;
-        $timeArr = [$this->ActiveTime . " mins", $this->TotalTime . " mins", "Serves " . $this->Yield];
+        $timeArr = [$this->cookTime . " mins", ($this->cookTime + $this->prepTime) . " mins", "Serves " . $this->serving];
         $stars = $this->StarRank();
 
         $timetxt = implode("", array_map(function ($foo, $bar) {
@@ -186,7 +190,7 @@ class Recipe
             </div>
         EOD;
     }
-    function stepPrint()
+    public function stepPrint()
     {
         $stepsArr = $this->steps;
         $stepsArrTxt = implode("\n", array_map(function ($foo, $bar) {
@@ -211,7 +215,7 @@ class Recipe
     }
 
     // getters
-    function getName()
+    public function getName()
     {
         return $this->RecipeName;
     }
@@ -219,42 +223,26 @@ class Recipe
 
 
 // functions
-function AccordionConst($arr)
+function float2rat($n, $tolerance = 1.e-6)
 {
-    echo '<div class="accordion accordion-flush" id="accordionFlushExample">';
-    foreach ($arr as $num => $val) {
-        $str = implode("\n", array_map(function ($foo) {
-            return '<li class="accordion-link"><a href="#">' . $foo . '</a></li>';
-        }, $val[1]));
-        $str2 = ($num == 0) ? "show" : "";
-        echo <<<EOD
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-heading$num">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse$num" aria-expanded="false" aria-controls="flush-collapse$num">
-                    $val[0]
-                </button>
-            </h2>
-            <div id="flush-collapse$num" class="accordion-collapse collapse $str2" aria-labelledby="flush-heading$num" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                $str
-                </div>
-            </div>
-        </div>
-        EOD;
-    }
-    echo '</div>';
-}
-function IconPrint($arr)
-{
-    // [...["icon Name", "icon class", "icon link"]] : arr
-    foreach ($arr as $val) {
-        echo <<<EOD
-        <div class="col smicon smicon-$val[0] rounded-pill d-inline-flex mx-1">
-            <a href="$val[2]" class="d-inline-flex">
-                <i class="$val[1]"></i>
-            </a>
-        </div>
-        EOD;
-    }
+    $h1 = 1;
+    $h2 = 0;
+    $k1 = 0;
+    $k2 = 1;
+    $b = 1 / $n;
+    do {
+        $b = 1 / $b;
+        $a = floor($b);
+        $aux = $h1;
+        $h1 = $a * $h1 + $h2;
+        $h2 = $aux;
+        $aux = $k1;
+        $k1 = $a * $k1 + $k2;
+        $k2 = $aux;
+        $b = $b - $a;
+    } while (abs($n - $h1 / $k1) > $n * $tolerance);
+
+    return "$h1/$k1";
 }
 ?>
+<!--  -->

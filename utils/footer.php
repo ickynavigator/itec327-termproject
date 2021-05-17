@@ -1,3 +1,18 @@
+<?php
+function IconPrint($arr)
+{
+    // [...["icon Name", "icon class", "icon link"]] : arr
+    foreach ($arr as $val) {
+        echo <<<EOD
+        <div class="col smicon smicon-$val[0] rounded-pill d-inline-flex mx-1">
+            <a href="$val[2]" class="d-inline-flex">
+                <i class="$val[1]"></i>
+            </a>
+        </div>
+        EOD;
+    }
+}
+?>
 </div>
 <footer class="container-fluid py-3">
     <div class="row">
@@ -37,4 +52,4 @@
 </script>
 
 <!-- My scripts  -->
-<script src="./js/index.min.js"></script>
+<script src="./js/index.js"></script>

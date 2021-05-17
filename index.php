@@ -1,5 +1,33 @@
-<?php include("./utils/config.php"); ?>
-<?php include("./utils/func.php"); ?>
+<?php
+include("./utils/config.php");
+include("./utils/func.php");
+
+function AccordionConst($arr)
+{
+    echo '<div class="accordion accordion-flush" id="accordionFlushExample">';
+    foreach ($arr as $num => $val) {
+        $str = implode("\n", array_map(function ($foo) {
+            return '<li class="accordion-link"><a href="#">' . $foo . '</a></li>';
+        }, $val[1]));
+        $str2 = ($num == 0) ? "show" : "";
+        echo <<<EOD
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading$num">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse$num" aria-expanded="false" aria-controls="flush-collapse$num">
+                    $val[0]
+                </button>
+            </h2>
+            <div id="flush-collapse$num" class="accordion-collapse collapse $str2" aria-labelledby="flush-heading$num" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                $str
+                </div>
+            </div>
+        </div>
+        EOD;
+    }
+    echo '</div>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +37,7 @@
     $pageName = "home";
     include("./utils/headtag.php");
     ?>
+    <link rel="stylesheet" href="./">
 </head>
 
 <body>
