@@ -1,63 +1,76 @@
 DROP DATABASE IF EXISTS ITEC327_TermProject;
 CREATE DATABASE ITEC327_TermProject;
 USE ITEC327_TermProject;
-CREATE TABLE ingredient_table (
+CREATE TABLE class (
+    id INT NOT NULL PRIMARY KEY,
+    class_name VARCHAR(256)
+);
+CREATE TABLE ingredients (
     id INT NOT NULL PRIMARY KEY,
     ingredient_name VARCHAR(256)
 );
-CREATE TABLE recipe_table (
+CREATE TABLE recipes (
     id INT NOT NULL PRIMARY KEY,
-    recipe_name VARCHAR(256) NOT NULL,
+    name VARCHAR(256) NOT NULL,
     rating INT NOT NULL,
-    recipe_desc TEXT,
+    description TEXT,
     timeToCook INT,
     timeToPrep INT,
-    serving INT
-);
-CREATE TABLE steps_table(
-    id INT NOT NULL PRIMARY KEY,
-    recipe_id INT NOT NULL,
-    stepTxt TEXT,
-    FOREIGN KEY (recipe_id) REFERENCES recipe_table(id)
-);
-CREATE TABLE tags_table(
-    id INT NOT NULL PRIMARY KEY,
-    recipe_id INT NOT NULL,
-    tag varchar(256),
-    FOREIGN KEY (recipe_id) REFERENCES recipe_table(id)
-);
-CREATE TABLE picture_table (
-    id INT NOT NULL PRIMARY KEY,
-    recipe_id INT NOT NULL,
+    serving INT,
     file_url TEXT,
-    FOREIGN KEY (recipe_id) REFERENCES recipe_table(id)
+    steps JSON
 );
-CREATE TABLE recipe_ingredients_list (
+-- CREATE TABLE steps(
+--     id INT NOT NULL PRIMARY KEY,
+--     id_recipe INT NOT NULL,
+--     stepTxt TEXT,
+--     FOREIGN KEY (id_recipe) REFERENCES recipe (id)
+-- );
+CREATE TABLE tags(
     id INT NOT NULL PRIMARY KEY,
-    recipe_id INT NOT NULL,
-    ingredient_id INT NOT NULL,
+    id_recipe INT NOT NULL,
+    tag varchar(256),
+    FOREIGN KEY (id_recipe) REFERENCES recipe (id)
+);
+-- CREATE TABLE picture (
+--     id INT NOT NULL PRIMARY KEY,
+--     id_recipe INT NOT NULL,
+--     file_url TEXT,
+--     FOREIGN KEY (id_recipe) REFERENCES recipe (id)
+-- );
+CREATE TABLE recipe_ingredients (
+    id INT NOT NULL PRIMARY KEY,
+    id_recipe INT NOT NULL,
+    id_ingredient INT NOT NULL,
     ingredient_desc VARCHAR(256),
     amount DECIMAL(5, 2),
-    FOREIGN KEY (recipe_id) REFERENCES recipe_table(id),
-    FOREIGN KEY (ingredient_id) REFERENCES ingredient_table(id)
+    FOREIGN KEY (id_recipe) REFERENCES recipe (id),
+    FOREIGN KEY (id_ingredient) REFERENCES ingredient (id)
+);
+CREATE TABLE recipe_class (
+    id INT NOT NULL PRIMARY KEY,
+    id_recipe INT NOT NULL,
+    id_class INT NOT NULL,
+    FOREIGN KEY (id_recipe) REFERENCES recipe (id),
+    FOREIGN KEY (id_class) REFERENCES class (id)
 );
 -- INSERT STATEMENTS
-INSERT INTO ingredient_table (id, ingredient_name)
-VALUES (1, "pound fresh prepared pizza dough"),
-    (2, "ounces shredded mozzarella cheese"),
-    (3, "cup of ricotta cheese"),
-    (4, "large egg yolk"),
-    (5, "teaspoon lemon zest"),
-    (6, "finely grated garlic cloves"),
-    (7, "teaspoon kosher salt"),
-    (8, "teaspoon black pepper"),
-    (9, "large egg"),
-    (10, "teaspoon dried Italian seasoning");
-INSERT INTO recipe_table (
+INSERT INTO ingredient (id, ingredient_name)
+VALUES (1, "pizza dough"),
+    (2, "mozzarella cheese"),
+    (3, "ricotta cheese"),
+    (4, "egg yolk"),
+    (5, "lemon zest"),
+    (6, "garlic cloves"),
+    (7, "kosher salt"),
+    (8, "black pepper"),
+    (9, "egg"),
+    (10, "Italian seasoning");
+INSERT INTO recipe (
         id,
-        recipe_name,
+        name,
         rating,
-        recipe_desc,
+        description,
         timeToCook,
         timeToPrep,
         serving
@@ -71,29 +84,36 @@ VALUES (
         30,
         4
     );
-INSERT INTO tags_table (id, recipe_id, tag)
+INSERT INTO tags (id, id_recipe, tag)
 VALUES (1, 1, "Dinner"),
     (2, 1, "Casserole"),
     (3, 1, "Meat"),
     (4, 1, "Party");
-INSERT INTO steps_table (id, recipe_id, stepTxt)
+INSERT INTO steps (id, id_recipe, stepTxt)
 VALUES (1, 1, 'step1'),
     (2, 1, 'step2'),
     (3, 1, 'step3'),
     (4, 1, 'step4'),
     (5, 1, 'step5');
-INSERT INTO recipe_ingredients_list (id, recipe_id, ingredient_id, amount)
-VALUES (1, 1, 1, 1),
-    (2, 1, 2, 6),
-    (3, 1, 3, 0.75),
-    (4, 1, 4, 1),
-    (5, 1, 5, 0.5),
-    (6, 1, 6, 2),
-    (7, 1, 7, 0.5),
-    (8, 1, 8, 0.75),
-    (9, 1, 9, 1),
-    (10, 1, 10, 1);
-INSERT INTO picture_table(id, recipe_id, file_url)
+INSERT INTO recipe_ingredients (
+        id,
+        id_recipe,
+        id_ingredient,
+        ingredient_desc,
+        amount
+    )
+VALUES (1, 1, 1, "pound fresh prepared", 1),
+    (2, 1, 2, "ounces shredded ", 6),
+    (3, 1, 3, "cup of", 0.75),
+    (4, 1, 4, "large", 1),
+    (5, 1, 5, "teaspoon", 0.5),
+    (6, 1, 6, "finely grated", 2),
+    (7, 1, 7, "teaspoon", 0.5),
+    (8, 1, 8, "teaspoon", 0.75),
+    (9, 1, 9, "large", 1),
+    (10, 1, 10, "teaspoon dried", 1);
+INSERT INTO picture(id, id_recipe, file_url)
 VALUES (1, 1, "./images/sample.jpeg"),
     (2, 1, "./images/sample.jpeg"),
     (3, 1, "./images/sample.jpeg");
+-- make a class insert
