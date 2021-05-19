@@ -1,31 +1,18 @@
-Recipe{
-        recipeID            : number : 1 : pk
-        name                : string : 1 : required
-        classification      : string : M
-        keywords            : string : M
-        caloriesPerPlate    : number : 1
-        ranking             : number : 1 : required
-        description         : string : 1
-        timeToPrep          : number : 1
-        timeToCook          : number : 1
-        servings            : number : 1
-        picture{
-            pictureID       : number : 1 : required
-            file            : blob   : 1 : required
-        }                            : M
-        steps{
-            stepNo          : number : 1 : required
-            stepDesc        : string : 1 : required
-            stepPicture     : blob   : 1
-        }                            : M : required
-        notes{
-            editorNote      : text   : 1
-            cooksnotes      : text   : 1
-            nutritionFacts  : text   : 1
-        }
-    }
-    Ingredients {
-        IngredientsID   : number : 1 : pk
-        name            : string : 1 : required
-        amount          : string : 1 : required
-    }          
+-- IMPORTANT QUERIES
+select vals
+from Test
+where JSON_EXTRACT(vals, "$.amount") = 500;
+-- 
+-- SELECT JSON_EXTRACT(vals, CONCAT('$[', ind.ind, '].name')), ind.ind
+-- 
+SELECT JSON_EXTRACT(vals, CONCAT('$[', ind, '].name'))
+FROM Test
+    CROSS JOIN (
+        SELECT 0 AS ind
+        UNION ALL
+        SELECT 1 AS ind
+        UNION ALL
+        SELECT 2 AS ind
+    ) ind
+WHERE JSON_LENGTH(vals) > ind
+    AND JSON_CONTAINS(vals->'$[*].amount', json_array(500));
