@@ -19,6 +19,7 @@ if ($res !== "error") {
         $res["timeToCook"],
         $res["serving"]
     );
+    // $CurrRecipe = $sampleRecipe;
 } else {
     header("HTTP/1.0 404 Not Found");
     echo "<h1>404 Not Found</h1>";

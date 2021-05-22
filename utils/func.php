@@ -15,7 +15,7 @@ $sampleRecipe = new Recipe(
     ["Dinner", "Casserole", "Party", "Meat"],
     3,
     "Supermarket brands of ricotta contain stabilizers, which can give the cheese a gummy texture when baked. Check the label and choose ricotta made with as few ingredients as possible.",
-    ["./images/sample.jpeg"],
+    ["/images/sample.jpeg", "/images/sample.jpeg", "/images/sample.jpeg"],
     [[1, "pound fresh prepared pizza dough"], [6, "ounces shredded mozzarella cheese"], [3 / 4, "cup of ricotta cheese"], [1, "large egg yolk"], [1 / 2, "teaspoon lemon zest"], [2, "finely grated garlic cloves"], [1 / 2, "teaspoon kosher salt"], [1 / 4, "teaspoon black pepper"], [1, "large egg"], [1, "teaspoon dried Italian seasoning"]],
     [$dummy, $dummy, $dummy, $dummy, $dummy],
     20,
@@ -154,7 +154,7 @@ class Recipe
     }
     public function infoPrint()
     {
-        $img = $this->picture[0];
+        $img = $this->pictures;
         $nm = $this->RecipeName;
         $desc = $this->description;
         $timeArr = [$this->cookTime . " mins", ($this->cookTime + $this->prepTime) . " mins", "Serves " . $this->serving];
@@ -171,9 +171,35 @@ class Recipe
         }, $timeArr, [["far fa-clock", "Active Time"], ["fas fa-history", "Total Time"], ["fas fa-user-friends", "Yield"]]));
 
         echo <<<EOD
-            <div class="col-auto d-flex justify-content-center align-items-center">
-                <div class="test-image"></div>
+            <div class="col-auto justify-content-center align-items-center">
+                <!-- <div class="test-image"></div> -->
                 <!-- <img src="$img" alt="$nm"> -->
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="$img[0]" class="d-block w-100" alt="">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="$img[1]" class="d-block w-100" alt="">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="$img[2]" class="d-block w-100" alt="">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
             <div class="col-auto pt-3 d-flex justify-content-center align-items-center text-center">
                 <div>

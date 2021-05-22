@@ -37,7 +37,6 @@ function AccordionConst($arr)
     $pageName = "home";
     include("./utils/headtag.php");
     ?>
-    <link rel="stylesheet" href="./">
 </head>
 
 <body>
@@ -54,7 +53,7 @@ function AccordionConst($arr)
             </span>
             </br>
             </br>
-            <a href="#">Sign up today <i class="fas fa-arrow-right"></i></a>
+            <a href="./addRecipe.php">Add a recipe today <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <br />
@@ -64,6 +63,7 @@ function AccordionConst($arr)
                 <div class="sticky-md-top">
                     <div>
                         <h1>Recipes</h1>
+                        <h4>Classification</h4>
                         <?php
                         AccordionConst($recipeCategory);
                         ?>

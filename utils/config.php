@@ -8,11 +8,10 @@ function console_log($data)
 ?>
 
 <?php
-// mysql://bb0a88c22d976c:799f22a5@us-cdbr-east-03.cleardb.com/heroku_fe26e33c7d26c68?reconnect=true
-$db_host = 'us-cdbr-east-03.cleardb.com';
-$db_user = 'bb0a88c22d976c';
-$db_password = '799f22a5';
-$db_db = 'heroku_fe26e33c7d26c68';
+$db_host = 'localhost';
+$db_user = 'mamp';
+$db_password = 'password';
+$db_db = 'ITEC327_TermProject';
 $db_port = 8889;
 
 $conn = new mysqli(
