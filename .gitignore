@@ -4,5 +4,6 @@ snippets.txt
 /a_misc/
 test.php
 /.vscode/
+.htaccess
 
 # git add . && git status && git commit --allow-empty -m "" && git pushall
