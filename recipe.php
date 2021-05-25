@@ -7,7 +7,6 @@ parse_str($uri['query'], $params);
 $res = recQuery($params['id']);
 if ($res !== "error") {
     $CurrRecipe = new Recipe(
-             	 
         $res["id"],
         $res["recipe_name"],
         $res["keywords"],

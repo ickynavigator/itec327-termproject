@@ -5,11 +5,6 @@
   "items": {
     "type": "object",
     "properties": {
-      "id": {
-        "type": "integer",
-        "minimum": 100000,
-        "maximum": 999999
-      },
       "name": {
         "type": "string",
         "minLength": 10,
@@ -19,6 +14,34 @@
         "type": "string",
         "minLength": 300,
         "maxLength": 500
+      },
+      "calories": {
+        "type": "number",
+        "multipleOf": "5",
+        "minimum": 50,
+        "maximum": 500
+      },
+      "difficulty": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 10
+      },
+      "rating": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 5
+      },
+      "timeToPrep": {
+        "type": "number",
+        "multipleOf": "5",
+        "minimum": 10,
+        "maximum": 60
+      },
+      "timeToCook": {
+        "type": "number",
+        "multipleOf": "5",
+        "minimum": 10,
+        "maximum": 60
       },
       "tag": {
         "type": "array",
@@ -38,11 +61,7 @@
         "maxItems": 6,
         "items": {
           "type": "string",
-          "enum": [
-            "class1",
-            "class2",
-            "class3"
-          ]
+          "enum": ["oven", "fried", "mixed", "no cook"]
         }
       },
       "image": {
@@ -52,10 +71,7 @@
         "maxItems": 4,
         "items": {
           "type": "string",
-          "enum": [
-            "testimage1",
-            "testimage2"
-          ]
+          "enum": ["testimage1", "testimage2"]
         }
       },
       "ingredient": {
@@ -69,20 +85,12 @@
             "amount": {
               "type": "number",
               "multipleOf": "5",
-              "minimum": "50",
-              "maximum": "200"
+              "minimum": 50,
+              "maximum": 200
             },
             "unit": {
               "type": "string",
-              "enum": [
-                "g",
-                "mg"
-              ]
-            },
-            "preparation": {
-              "type": "string",
-              "minLength": 10,
-              "maxLength": 15
+              "enum": ["g", "mg"]
             },
             "name": {
               "type": "string",
@@ -90,12 +98,7 @@
               "maxLength": 15
             }
           },
-          "required": [
-            "amount",
-            "unit",
-            "name",
-            "preparation"
-          ]
+          "required": ["amount", "unit", "name"]
         }
       },
       "steps": {
@@ -118,24 +121,22 @@
               "maxItems": 4,
               "items": {
                 "type": "string",
-                "enum": [
-                  "testimage1",
-                  "testimage2"
-                ]
+                "enum": ["testimage1", "testimage2"]
               }
             }
           },
-          "required": [
-            "description",
-            "stepPicture"
-          ]
+          "required": ["description", "stepPicture"]
         }
       }
     },
     "required": [
-      "id",
       "name",
       "description",
+      "calories",
+      "difficulty",
+      "rating",
+      "timeToPrep",
+      "timeToCook",
       "tag",
       "class",
       "image",

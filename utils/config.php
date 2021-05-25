@@ -1,18 +1,22 @@
 <?php
 function console_log($data)
 {
-    echo '<script>';
-    echo 'console.log(' . json_encode($data) . ')';
-    echo '</script>';
+    echo '<script>console.log(' . json_encode($data) . ')</script>';
 }
-?>
 
-<?php
-$db_host = 'localhost';
-$db_user = 'mamp';
-$db_password = 'password';
-$db_db = 'ITEC327_TermProject';
-$db_port = 8889;
+if ($_SERVER['build'] === "heroku") {
+    $db_host = getenv('db_host');
+    $db_user = getenv('db_user');
+    $db_password = getenv('db_password');
+    $db_db = getenv('db_db');
+    $db_port = getenv('db_port');
+} else {
+    $db_host = 'localhost';
+    $db_user = 'mamp';
+    $db_password = 'password';
+    $db_db = 'ITEC327_TermProject';
+    $db_port = 8889;
+}
 
 $conn = new mysqli(
     $db_host,
@@ -82,4 +86,3 @@ function recQuery($id)
 // echo 'Protocol version: ' . $conn->protocol_version;
 
 // $conn->close();
-?>
