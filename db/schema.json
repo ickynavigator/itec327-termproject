@@ -1,91 +1,108 @@
 {
-  "type": "object",
-  "properties": {
-    "id": {
-      "type": "number",
-      "minimum": 100000,
-      "maximum": 999999
-    },
-    "name": {
-      "type": "string",
-      "minLength": 10,
-      "maxLength": 20
-    },
-    "description": {
-      "type": "string",
-      "minLength": 300,
-      "maxLength": 500
-    },
-    "tag": {
-      "type": "array",
-      "uniqueItems": true,
-      "minItems": 4,
-      "maxItems": 6,
-      "items": {
+  "type": "array",
+  "uniqueItems": true,
+  "minItems": 10,
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer",
+        "minimum": 100000,
+        "maximum": 999999
+      },
+      "name": {
         "type": "string",
         "minLength": 10,
-        "maxLength": 10
-      }
-    },
-    "class": {
-      "type": "array",
-      "uniqueItems": true,
-      "minItems": 4,
-      "maxItems": 6,
-      "items": {
+        "maxLength": 20
+      },
+      "description": {
         "type": "string",
-        "enum": ["class1", "class2", "class3"]
-      }
-    },
-    "image": {
-      "type": "array",
-      "uniqueItems": true,
-      "minItems": 3,
-      "maxItems": 4,
-      "items": {
-        "type": "string",
-        "enum": ["testimage1", "testimage2"]
-      }
-    },
-    "ingredient": {
-      "type": "array",
-      "uniqueItems": true,
-      "minItems": 4,
-      "maxItems": 6,
-      "items": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "number",
-            "multipleOf": 5,
-            "exclusiveminimum": 50,
-            "exclusiveMaximum": 200
+        "minLength": 300,
+        "maxLength": 500
+      },
+      "tag": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 4,
+        "maxItems": 6,
+        "items": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10
+        }
+      },
+      "class": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 4,
+        "maxItems": 6,
+        "items": {
+          "type": "string",
+          "enum": [
+            "class1",
+            "class2",
+            "class3"
+          ]
+        }
+      },
+      "image": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 3,
+        "maxItems": 4,
+        "items": {
+          "type": "string",
+          "enum": [
+            "testimage1",
+            "testimage2"
+          ]
+        }
+      },
+      "ingredient": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 4,
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "multipleOf": "5",
+              "minimum": "50",
+              "maximum": "200"
+            },
+            "unit": {
+              "type": "string",
+              "enum": [
+                "g",
+                "mg"
+              ]
+            },
+            "preparation": {
+              "type": "string",
+              "minLength": 10,
+              "maxLength": 15
+            },
+            "name": {
+              "type": "string",
+              "minLength": 10,
+              "maxLength": 15
+            }
           },
-          "unit": {
-            "type": "string",
-            "enum": ["g", "mg"]
-          },
-          "preparation": {
-            "type": "string",
-            "minLength": 10,
-            "maxLength": 15
-          },
-          "name": {
-            "type": "string",
-            "minLength": 10,
-            "maxLength": 15
-          }
-        },
-        "required": ["amount", "unit", "name", "preparation"]
-      }
-    },
-    "steps": {
-      "type": "object",
-      "properties": {
+          "required": [
+            "amount",
+            "unit",
+            "name",
+            "preparation"
+          ]
+        }
+      },
+      "steps": {
         "type": "array",
         "uniqueItems": true,
         "minItems": 5,
-        "maxItems": 6,
+        "maxItems": 10,
         "items": {
           "type": "object",
           "properties": {
@@ -95,23 +112,35 @@
               "maxLength": 1000
             },
             "stepPicture": {
-              "type": "string",
-              "enum": ["testimage1", "testimage2"]
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 3,
+              "maxItems": 4,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "testimage1",
+                  "testimage2"
+                ]
+              }
             }
           },
-          "required": ["description", "stepPicture"]
+          "required": [
+            "description",
+            "stepPicture"
+          ]
         }
       }
-    }
-  },
-  "required": [
-    "id",
-    "name",
-    "description",
-    "tag",
-    "class",
-    "image",
-    "ingredient",
-    "steps"
-  ]
+    },
+    "required": [
+      "id",
+      "name",
+      "description",
+      "tag",
+      "class",
+      "image",
+      "ingredient",
+      "steps"
+    ]
+  }
 }
