@@ -160,6 +160,15 @@ class Recipe
         $timeArr = [$this->cookTime . " mins", ($this->cookTime + $this->prepTime) . " mins", "Serves " . $this->serving];
         $stars = $this->StarRank();
 
+        $imgtxt = implode("", array_map(function ($currImg, $ind) {
+            $isActive = ($ind === 0) ? "active" : "";
+            return <<<EOD
+            <div class="carousel-item $isActive">
+                <img src="$currImg" class="d-block w-100" alt="">
+            </div>
+            EOD;
+        }, $img, array_keys($img)));
+
         $timetxt = implode("", array_map(function ($foo, $bar) {
             return <<<EOD
                 <div class="col-4">
@@ -171,7 +180,7 @@ class Recipe
         }, $timeArr, [["far fa-clock", "Active Time"], ["fas fa-history", "Total Time"], ["fas fa-user-friends", "Yield"]]));
 
         echo <<<EOD
-            <div class="col-auto justify-content-center align-items-center">
+            <div class="col-auto rounded justify-content-center align-items-center">
                 <!-- <div class="test-image"></div> -->
                 <!-- <img src="$img" alt="$nm"> -->
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -181,15 +190,7 @@ class Recipe
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="$img[0]" class="d-block w-100" alt="">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="$img[1]" class="d-block w-100" alt="">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="$img[2]" class="d-block w-100" alt="">
-                        </div>
+                        $imgtxt
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

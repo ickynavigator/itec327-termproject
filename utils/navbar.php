@@ -31,7 +31,7 @@ function navPrint($currPage, $navArr, $dropArr)
 <nav class="navbar navbar-expand-lg navbar-light bg-body">
     <div class="container-fluid">
         <a class="navbar-brand" href="./index.php">
-            <img src="images/fox.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="./images/fox.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
             Fox Recipe's
         </a>
 
