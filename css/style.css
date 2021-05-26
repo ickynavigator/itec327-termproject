@@ -95,7 +95,7 @@ body {
   width: inherit;
   height: 7rem;
   background: #eb4a36;
-  border-radius: 1rem;
+  border-radius: 0;
 }
 
 .recipe-card:hover {

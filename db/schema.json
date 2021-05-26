@@ -57,11 +57,30 @@
       "class": {
         "type": "array",
         "uniqueItems": true,
-        "minItems": 4,
-        "maxItems": 6,
+        "minItems": 2,
+        "maxItems": 3,
         "items": {
           "type": "string",
-          "enum": ["oven", "fried", "mixed", "no cook"]
+          "enum": [
+            "Breakfast",
+            "Lunch",
+            "Beverages",
+            "Appetizers",
+            "Soups",
+            "Salads",
+            "Beef",
+            "Poultry",
+            "Pork",
+            "Seafood",
+            "Vegetarian",
+            "Vegetables",
+            "Other",
+            "Desserts",
+            "Canning / Freezing",
+            "Breads",
+            "Holidays",
+            "Entertaining"
+          ]
         }
       },
       "image": {
@@ -71,7 +90,19 @@
         "maxItems": 4,
         "items": {
           "type": "string",
-          "enum": ["testimage1", "testimage2"]
+          "enum": [
+            "image-1.jpeg",
+            "image-2.jpeg",
+            "image-3.jpeg",
+            "image-4.jpeg",
+            "image-5.jpeg",
+            "image-6.jpeg",
+            "image-7.jpeg",
+            "image-8.jpeg",
+            "image-9.jpeg",
+            "image-10.jpeg",
+            "image-11.jpeg"
+          ]
         }
       },
       "ingredient": {
@@ -90,7 +121,7 @@
             },
             "unit": {
               "type": "string",
-              "enum": ["g", "mg"]
+              "enum": ["g", "mg", "cup of"]
             },
             "name": {
               "type": "string",
@@ -115,14 +146,20 @@
               "maxLength": 1000
             },
             "stepPicture": {
-              "type": "array",
-              "uniqueItems": true,
-              "minItems": 3,
-              "maxItems": 4,
-              "items": {
-                "type": "string",
-                "enum": ["testimage1", "testimage2"]
-              }
+              "type": "string",
+              "enum": [
+                "image-1.jpeg",
+                "image-2.jpeg",
+                "image-3.jpeg",
+                "image-4.jpeg",
+                "image-5.jpeg",
+                "image-6.jpeg",
+                "image-7.jpeg",
+                "image-8.jpeg",
+                "image-9.jpeg",
+                "image-10.jpeg",
+                "image-11.jpeg"
+              ]
             }
           },
           "required": ["description", "stepPicture"]

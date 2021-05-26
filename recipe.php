@@ -4,22 +4,9 @@ include("./utils/func.php");
 $uri = parse_url($_SERVER['REQUEST_URI']);
 parse_str($uri['query'], $params);
 
-$res = recQuery($params['id']);
+$res = recipeQuery($params['id']);
 if ($res !== "error") {
-    $CurrRecipe = new Recipe(
-        $res["id"],
-        $res["recipe_name"],
-        $res["keywords"],
-        $res["rating"],
-        $res["description"],
-        $res["pictures"],
-        $res["ingredients"],
-        $res["steps"],
-        $res["timeToPrep"],
-        $res["timeToCook"],
-        $res["serving"]
-    );
-    // $CurrRecipe = $sampleRecipe;
+    $CurrRecipe = (recipesArray([$params['id']]))[0];
 } else {
     header("HTTP/1.0 404 Not Found");
     echo "<h1>404 Not Found</h1>";
@@ -61,12 +48,12 @@ if ($res !== "error") {
 
     <div class="container-fluid py-5">
         <h3>Other Recipes You May Like</h3>
-        <div class="row row-cols-2 row-cols-md-4 g-2 g-lg-3 section">
+        <div class="row row-cols-2 row-cols-md-4 g-1 g-lg-3">
             <?php
-            for ($i = 1; $i <= 8; $i++) {
-                echo "<div class='col'>";
-                $CurrRecipe->Cardbox();
-                echo "</div>";
+            $randIDS = randomRecipeIds(8);
+            shuffle($randIDS);
+            foreach (recipesArray($randIDS) as $val) {
+                echo "<div class='col d-inline'>" . $val->CardBox() . "</div>";
             }
             ?>
         </div>

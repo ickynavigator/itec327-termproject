@@ -14,24 +14,20 @@
 <body>
     <?php include("./utils/navbar.php"); ?>
     <div class="container main-div">
-        <form class="d-flex search-bar sticky-top">
-            <div class="input-group mb-3 search-div">
-                <span class="input-group-text search-icon" id="basic-addon1">
-                    <i class="fas fa-search"></i>
-                </span>
-                <input class="form-control me-2 search-text" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn search-btn" type="submit">
-                    Search
-                </button>
-            </div>
-        </form>
+        <?php include("./utils/searchbar.php"); ?>
         <div class="row row-cols-sm-2 row-cols-md-4 mt-1 g-2 g-lg-3 section">
-            <br>
             <?php
-            for ($i = 1; $i <= 15; $i++) {
-                echo "<div class='col'>";
-                $sampleRecipe->Cardbox();
-                echo "</div>";
+            $uri = parse_url($_SERVER['REQUEST_URI']);
+            parse_str($uri['query'], $params);
+
+            if (!empty($params)) {
+                echo "hi";
+            } else {
+                $randIDS = randomRecipeIds(20);
+                shuffle($randIDS);
+                foreach (recipesArray($randIDS) as $val) {
+                    echo "<div class='col d-inline'>" . $val->CardBox() . "</div>";
+                }
             }
             ?>
         </div>

@@ -32,57 +32,115 @@ if ($conn->connect_error) {
     exit();
 }
 
-function multiQuery($item, $query)
+function idQuery($query)
 {
-    $arr = [];
     $res = $GLOBALS["conn"]->query($query);
     if ($res->num_rows > 0) {
+        $arr = [];
         while ($row = $res->fetch_assoc()) {
-            if (sizeof($item) < 2)
-                array_push($arr, $row[$item[0]]);
-            else
-                array_push($arr, [$row[$item[0]], $row[$item[1]]]);
+            array_push($arr, $row["id"]);
         }
-        return $arr;
     } else {
-        return false;
+        $arr = "error";
     }
+    return $arr;
 }
 
-function recQuery($id)
+function searchQuery($column, $search)
+{
+    $query = <<<EOD
+        SELECT  `id`
+        FROM    `recipes`
+        WHERE   lower(`$column`) LIKE lower('%$search%');
+    EOD;
+    return idQuery($query);
+}
+
+function searchQueryJSON($column, $search, $sub = "")
+{
+    $add =  ($sub === "") ? "" : ".$sub";
+    $query = <<<EOD
+        SELECT  `id`
+        FROM    `recipes`
+        WHERE   JSON_SEARCH(`$column`, 'all', '%$search%', NULL, '$[*]$add') IS NOT NULL
+    EOD;
+    return idQuery($query);
+}
+
+function recipeQuery($id)
 {
     $arr = [];
-
-    $query1 = "SELECT * FROM recipe_table WHERE id=" . $id;
-    $query2 = "SELECT * FROM steps_table WHERE recipe_id=" . $id;
-    $query3 = "SELECT * FROM tags_table WHERE recipe_id=" . $id;
-    $query4 = "SELECT * FROM picture_table WHERE recipe_id=" . $id;
-    $query5 = "SELECT * FROM recipe_ingredients_list i JOIN ingredient_table r ON i.ingredient_id = r.id WHERE i.recipe_id =" . $id;
-
-    $result = $GLOBALS["conn"]->query($query1);
+    $query = <<<EOD
+        SELECT * 
+        FROM `recipes` 
+        WHERE `id`="$id"
+    EOD;
+    $result = $GLOBALS["conn"]->query($query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $arr["id"] = $row["id"];
-        $arr["recipe_name"] = $row["recipe_name"];
-        $arr["rating"] = intval($row["rating"]);
+        $arr["name"] = $row["name"];
         $arr["description"] = $row["description"];
-        $arr["timeToPrep"] = $row["timeToPrep"];
-        $arr["timeToCook"] = $row["timeToCook"];
-        $arr["serving"] = $row["serving"];
+        $arr["calories"] = intval($row["calories"]);
+        $arr["difficulty"] = intval($row["difficulty"]);
+        $arr["rating"] = $row["rating"];
+        $arr["timeToPrep"] = intval($row["timeToPrep"]);
+        $arr["timeToCook"] = intval($row["timeToCook"]);
+        $arr["tag"] = json_decode($row["tag"], true);
+        $arr["class"] = json_decode($row["class"], true);
+        $arr["image"] = json_decode($row["image"], true);
+        $arr["ingredient"] = json_decode($row["ingredient"], true);
+        $arr["steps"] = json_decode($row["steps"], true);
     } else {
         return "error";
     }
-    $arr["steps"] = multiQuery(["stepTxt"], $query2);
-    $arr["keywords"] = multiQuery(["tag"], $query3);
-    $arr["pictures"] = multiQuery(["file"], $query4);
-    $arr["ingredients"] = multiQuery(["amount", "ingredient_name"], $query5);
-
     return $arr;
 }
-// echo 'Success: A proper connection to MySQL was made.';
-// echo '<br>';
-// echo 'Host information: ' . $conn->host_info;
-// echo '<br>';
-// echo 'Protocol version: ' . $conn->protocol_version;
+
+function randomRecipeIds($amount = 0)
+{
+    $query = <<<EOD
+        SELECT `id`
+        FROM `recipes`;
+    EOD;
+    $idArr = idQuery($query);
+    return array_map(function ($key) use ($idArr) {
+        return $idArr[$key];
+    }, array_rand($idArr, $amount));
+}
+
+function recipesArray($idArr = [])
+{
+    return array_map(
+        function ($ID) {
+            $res = recipeQuery($ID);
+            $curr = new Recipe(
+                $res["id"],
+                $res["name"],
+                $res["description"],
+                $res["calories"],
+                $res["difficulty"],
+                $res["rating"],
+                $res["timeToPrep"],
+                $res["timeToCook"],
+                $res["tag"],
+                $res["class"],
+                $res["image"],
+                $res["ingredient"],
+                $res["steps"]
+            );
+            return $curr;
+        },
+        $idArr
+    );
+}
+
+$successTXT = <<<EOD
+    Success: A proper connection to MySQL was made.
+    </br>
+    Host information: $conn->host_info
+    </br>
+    Protocol version: $conn->protocol_version
+EOD;
 
 // $conn->close();

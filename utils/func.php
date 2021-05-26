@@ -1,82 +1,60 @@
 <?php
-$recipeCategory = [
-    ["Dish Type", ["Appetizers & Snacks", "Bread Recipes", "Cake Recipes", "Candy and Fudge", "Casserole Recipes", "Christmas Cookies", "Cocktail Recipes", "Main Dishes", "Pasta Recipes", "Pie Recipes", "Sandwiches"]],
-    ["Meal Type", ["Breakfast and Brunch", "Desserts", "Dinners", "Lunch"]],
-    ["Diet and Health", ["Diabetic", "Gluten Free", "High Fiber Recipes", "Low Calorie"]],
-    ["World Cuisine", ["Chinese", "Indian", "Italian", "Mexican"]],
-    ["Seasonal", ["Baby Shower", "Birthday", "Christmas", "Halloween"]]
-];
-$dummy = "Labour, of evaluated would he the a the our what is in the arduous sides behavioural is which the have didn't kicked records the it framework by the for traveler sure the can most well her. Entered have break himself cheek, and activity, for bit of text.";
-
-
-$sampleRecipe = new Recipe(
-    "1",
-    "White calzones with marinara sauce",
-    ["Dinner", "Casserole", "Party", "Meat"],
-    3,
-    "Supermarket brands of ricotta contain stabilizers, which can give the cheese a gummy texture when baked. Check the label and choose ricotta made with as few ingredients as possible.",
-    ["/images/sample.jpeg", "/images/sample.jpeg", "/images/sample.jpeg"],
-    [[1, "pound fresh prepared pizza dough"], [6, "ounces shredded mozzarella cheese"], [3 / 4, "cup of ricotta cheese"], [1, "large egg yolk"], [1 / 2, "teaspoon lemon zest"], [2, "finely grated garlic cloves"], [1 / 2, "teaspoon kosher salt"], [1 / 4, "teaspoon black pepper"], [1, "large egg"], [1, "teaspoon dried Italian seasoning"]],
-    [$dummy, $dummy, $dummy, $dummy, $dummy],
-    20,
-    30,
-    4
-);
-?>
-
-<?php
 class Recipe
 {
-    private $Recipeid = "";
-    private $RecipeName = "";
-    private $keywords = [""];
-    private $rating = 0;
+    private $id = 0;
+    private $name = "";
     private $description = "";
-    private $cookTime = 0;
-    private $prepTime = 0;
-    private $serving = 0;
-    private $steps = [""];
-
-    private $ingredients = [[0, ""]];
-    private $pictures = [];
+    private $calories = 0;
+    private $difficulty = 0;
+    private $rating = 0;
+    private $timeToPrep = 0;
+    private $timeToCook = 0;
+    private $tag = [""];
+    private $class = [""];
+    private $image = [""];
+    private $ingredient = [[0, "", ""]];
+    private $steps = [["", ""]];
 
     public function __construct(
-        $Recipeid,
-        $RecipeName,
-        $keywords,
-        $rating,
+        $id,
+        $name,
         $description,
-        $pictures,
-        $ingredients,
-        $steps,
-        $prepTime,
-        $cookTime,
-        $serving
+        $calories,
+        $difficulty,
+        $rating,
+        $timeToPrep,
+        $timeToCook,
+        $tag,
+        $class,
+        $image,
+        $ingredient,
+        $steps
     ) {
-        $this->Recipeid = $Recipeid;
-        $this->RecipeName = $RecipeName;
-        $this->keywords = $keywords;
-        $this->rating = $rating;
+        $this->id = $id;
+        $this->name = $name;
         $this->description = $description;
-        $this->pictures = $pictures;
-        $this->ingredients = $ingredients;
+        $this->calories = $calories;
+        $this->difficulty = $difficulty;
+        $this->rating = $rating;
+        $this->timeToPrep = $timeToPrep;
+        $this->timeToCook = $timeToCook;
+        $this->tag = $tag;
+        $this->class = $class;
+        $this->image = $image;
+        $this->ingredient = $ingredient;
         $this->steps = $steps;
-        $this->prepTime = $prepTime;
-        $this->cookTime = $cookTime;
-        $this->serving = $serving;
     }
 
     public function CardBox()
     {
-        $id = $this->Recipeid;
-        $nm = $this->RecipeName;
-        $pic = $this->pictures[0];
+        $id = $this->id;
+        $nm = $this->name;
+        $pic = $this->image[0];
         $stars = $this->StarRank();
 
-        // <img src="" class="card-img-top" alt="">
-        echo <<<EOD
-        <a href="./recipe?id=$id" class="card recipe-card py-3" id="recipe-$id">
-            <img src="$pic" class="card-img-top" alt="$nm">
+        return <<<EOD
+        <a href="./recipe?id=$id" class="card recipe-card h-100" id="recipe-$id">
+            <img src="./images/$pic" class="card-img-top" alt="$nm">
             <div class="card-body">
                 $stars
                 <h5 class="card-title">$nm</h5>
@@ -98,96 +76,64 @@ class Recipe
                                 'far fa-star')); //empty star
                     return  "<i class='$cls' style='color: #FFD700;'></i>";
                 },
-                range(1, 5),
-                range(1, 5)
+                range(0, 4),
+                range(0, 4)
             )
         ) . "</div>";
     }
+    public function DifficultyRank()
+    {
+        $difficulty = $this->difficulty;
+        $level = "easy";
+        $level = ($difficulty <= 3) ? "Easy" : (($difficulty <= 7) ? "Normal" : "Challenging");
+        return "<div class='row rounded'>"
+            . implode(
+                "",
+                array_map(
+                    function ($val, $keys) use ($difficulty) {
+                        $cls =
+                            ($difficulty >= $keys + 1 && $keys <= 3 - 1) ?
+                            'bg-success' : //green bar
+                            (($difficulty >= $keys + 1 && $keys >= 3 - 1  && 8 - 1 <= $keys) ?
+                                "bg-danger" : // 
+                                (($difficulty >= $keys + 1) ? "bg-warning" : 'bg-light'));
+                        return  "<div class='border col $cls border-dark' style='height: 1rem'></div>";
+                    },
+                    range(0, 9),
+                    range(0, 9)
+                )
+            )
+            . "</div>"
+            . "<h4 class='text-muted'>Difficulty = $level</h4>";
+    }
 
     // printers
-    public function ingredientPrint()
+    public function ImagePrint()
     {
-        $ing = $this->ingredients;
-        $ingCnt = sizeof($ing);
-
-        $ingTxt = implode("", array_map(function ($foo, $i) use ($ingCnt) {
-            $bar = ($i != $ingCnt - 1) ? "<hr class='w-auto'>" : "";
-            $amount = (intval($foo[0]) == $foo[0]) ? intval($foo[0]) : float2rat($foo[0]);
-            $item = $foo[1];
-            return <<<EOD
-                <div class="form-check form-check-inline w-100">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox">
-                    <span>$amount $item</span>
-                    </label>
-                </div>
-                $bar
-            EOD;
-        }, $ing, array_keys($ing)));
-
-        echo <<<EOD
-            <div class="pb-3">
-                <h3>Ingredients</h3>
-                <hr class="w-auto">
-                <div>
-                    $ingTxt
-                </div>
-            </div>
-        EOD;
-    }
-    public function tagPrint()
-    {
-        $tag = $this->keywords;
-
-        $tagTxt = implode("\n", array_map(function ($foo) {
-            return '<a class="btn btn-primary my-2 recipe-tag rounded-pill" href="#" role="button">' . $foo . '</a>';
-        }, $tag));
-
-        echo <<<EOD
-            <div>
-                <h3>Tags</h3>
-                <div>
-                    $tagTxt
-                </div>
-            </div>
-        EOD;
-    }
-    public function infoPrint()
-    {
-        $img = $this->pictures;
-        $nm = $this->RecipeName;
-        $desc = $this->description;
-        $timeArr = [$this->cookTime . " mins", ($this->cookTime + $this->prepTime) . " mins", "Serves " . $this->serving];
-        $stars = $this->StarRank();
+        $img = $this->image;
 
         $imgtxt = implode("", array_map(function ($currImg, $ind) {
             $isActive = ($ind === 0) ? "active" : "";
             return <<<EOD
             <div class="carousel-item $isActive">
-                <img src="$currImg" class="d-block w-100" alt="">
+                <img src="./images/$currImg" class="d-block w-100" alt="">
             </div>
             EOD;
         }, $img, array_keys($img)));
 
-        $timetxt = implode("", array_map(function ($foo, $bar) {
+        $imgButtons = implode("", array_map(function ($ind) {
+            $isActive = ($ind === 0) ? 'class="active" aria-current="true"' : "";
+            $slidenum = $ind + 1;
             return <<<EOD
-                <div class="col-4">
-                    <i class="$bar[0]"></i>
-                    <h4>$bar[1]</h4>
-                    <h6 class="text-muted">$foo</h6>
-                </div>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="$ind" aria-label="Slide $slidenum" $isActive></button>
             EOD;
-        }, $timeArr, [["far fa-clock", "Active Time"], ["fas fa-history", "Total Time"], ["fas fa-user-friends", "Yield"]]));
+        }, array_keys($img)));
 
-        echo <<<EOD
+        return <<<EOD
             <div class="col-auto rounded justify-content-center align-items-center">
-                <!-- <div class="test-image"></div> -->
-                <!-- <img src="$img" alt="$nm"> -->
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        $imgButtons
                     </div>
                     <div class="carousel-inner">
                         $imgtxt
@@ -202,6 +148,82 @@ class Recipe
                     </button>
                 </div>
             </div>
+        EOD;
+    }
+    public function ingredientPrint()
+    {
+        $ing = $this->ingredient;
+        $ingCnt = sizeof($ing);
+
+        $ingTxt = implode("", array_map(function ($foo) {
+            $amount = $foo['amount'];
+            $unit = $foo['unit'];
+            $name = $foo['name'];
+            return <<<EOD
+                <div class="form-check form-check-inline w-100">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox">
+                    <span>$amount $unit $name</span>
+                    </label>
+                </div>
+                <hr class='w-auto'>
+            EOD;
+        }, $ing));
+
+        echo <<<EOD
+            <div class="pb-3">
+                <h3>Ingredients</h3>
+                <hr class="w-auto">
+                <div>
+                    $ingTxt
+                </div>
+            </div>
+        EOD;
+    }
+    public function tagPrint()
+    {
+        $tag = $this->tag;
+        $class = $this->class;
+
+        $tagTxt = implode("\n", array_map(function ($foo) {
+            return '<a class="btn btn-primary my-2 recipe-tag rounded-pill" href="#" role="button">' . $foo . '</a>';
+        }, $tag));
+
+        $classTxt = implode("\n", array_map(function ($foo) {
+            return '<a class="btn btn-success my-2 recipe-tag rounded-pill" href="#" role="button">' . $foo . '</a>';
+        }, $class));
+
+        echo <<<EOD
+            <div>
+                <h3>Classes & Tags</h3>
+                <div>
+                    $tagTxt
+                    $classTxt
+                </div>
+            </div>
+        EOD;
+    }
+    public function infoPrint()
+    {
+        $img = $this->ImagePrint();
+        $nm = $this->name;
+        $desc = $this->description;
+        $details = [$this->timeToCook . " mins", ($this->timeToCook + $this->timeToPrep) . " mins", $this->calories . " kj"];
+        $stars = $this->StarRank();
+        $difficulty = $this->DifficultyRank();
+
+        $detailsTxt = implode("", array_map(function ($foo, $bar) {
+            return <<<EOD
+                <div class="col-4">
+                    <i class="$bar[0]"></i>
+                    <h4>$bar[1]</h4>
+                    <h6 class="text-muted">$foo</h6>
+                </div>
+            EOD;
+        }, $details, [["far fa-clock", "Active Time"], ["fas fa-history", "Total Time"], ["far fa-heart", "Calories"]]));
+
+        echo <<<EOD
+            $img
             <div class="col-auto pt-3 d-flex justify-content-center align-items-center text-center">
                 <div>
                     <h1>$nm</h1>
@@ -209,9 +231,10 @@ class Recipe
                     $stars
                     <hr class="w-100">
                     <div class="row w-100 text-center">
-                        $timetxt
+                    $detailsTxt
                     </div>
                     <hr class="w-100">
+                    $difficulty
                 </div>
             </div>
         EOD;
@@ -219,17 +242,29 @@ class Recipe
     public function stepPrint()
     {
         $stepsArr = $this->steps;
-        $stepsArrTxt = implode("\n", array_map(function ($foo, $bar) {
-            $i = $bar + 1;
-            return <<<EOD
-                <div class="form-check form-check-inline w-100">
-                    <input class="form-check-input" type="checkbox" id="chkStep$i">
-                    <label class="form-check-label" for="chkStep$i">STEP $i</label>
-                    <p>$foo</p>
-                </div>
-                <hr class="w-auto">
-            EOD;
-        }, $stepsArr, array_keys($stepsArr)));
+        $stepsArrTxt = implode(
+            "\n",
+            array_map(function ($foo, $bar) {
+                $i = $bar + 1;
+                $desc = $foo['description'];
+                $imageurl = $foo['stepPicture'];
+                return <<<EOD
+                    <div class="form-check form-check-inline w-100">
+                        <input class="form-check-input" type="checkbox" id="chkStep$i">
+                        <label class="form-check-label" for="chkStep$i">STEP $i</label>
+                        <div class="row">
+                            <div class="col">
+                                <p>$desc</p>
+                            </div>
+                            <div class="col-sm-none col-md-3">
+                                <img src="./images/$imageurl" class="d-block w-100" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="w-auto">
+                EOD;
+            }, $stepsArr, array_keys($stepsArr))
+        );
 
         echo <<<EOD
             <h3>How to Make It</h3>
@@ -243,7 +278,7 @@ class Recipe
     // getters
     public function getName()
     {
-        return $this->RecipeName;
+        return $this->name;
     }
 }
 
@@ -270,5 +305,3 @@ function float2rat($n, $tolerance = 1.e-6)
 
     return "$h1/$k1";
 }
-?>
-<!--  -->
