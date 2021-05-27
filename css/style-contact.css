@@ -7,9 +7,7 @@
 }
 
 .leftDiv button {
-  border: none;
   background: #eb4a36 !important;
-  color: #ffffff;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -20,20 +18,16 @@
 
 .rightDiv {
   border-radius: 1rem;
-  color: #ffffff;
   background: #eb4a36;
 }
 
 .rightDiv form input,
 .rightDiv form textarea {
-  border-color: #ffffff;
   background: transparent;
 }
 
 .rightDiv form input[type="submit"],
 .rightDiv form textarea[type="submit"] {
-  border: none;
-  background: #ffffff !important;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }

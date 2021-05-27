@@ -11,9 +11,7 @@ body {
 
 body {
   position: relative;
-  @include sm {
-  }
-
+  font-family: $sans-ser;
   @include md {
     padding: 0 3rem;
   }
@@ -21,17 +19,13 @@ body {
 
 .navbar {
   font-family: $sans-ser;
-  padding: 1rem 0;
-
   .active {
     color: $clr-select !important;
   }
-
   &-brand {
     font-family: $cursive;
     color: $clr-5 !important;
   }
-
   a {
     color: $clr-5 !important;
     @include nav-link();
@@ -41,7 +35,6 @@ body {
     }
     &[role="button"] {
       background-color: $clr-select;
-      text-decoration: none;
       color: $clr-white !important;
       &:hover,
       &:focus {
@@ -49,41 +42,54 @@ body {
       }
     }
   }
+}
 
-  .dropdown {
-    float: left;
-
-    .dropdown-toggle {
-      @include nav-link();
-      border: none;
-      outline: none;
-      font-family: inherit;
+.accordion-link {
+  font-family: $sans-ser;
+  a {
+    text-decoration: none;
+    color: $clr-5;
+    transition: 0.5s ease-in-out;
+    &:visited {
+      text-decoration: none;
     }
-
-    .dropdown-menu {
-      a {
-        @include nav-link();
-        @include hover-focus-clr();
-      }
+    &:focus,
+    &:hover {
+      padding: 0 1.25rem;
+      text-decoration: underline;
+      color: $clr-select;
     }
   }
 }
 
 .recipe-card {
-  color: $clr-black;
-  text-decoration: none;
+  font-family: $sans-ser;
   border: 1px solid $clr-select;
+  transition: 0.5s;
   img {
-    width: inherit;
-    height: 7rem;
-    background: $clr-select;
+    height: 10rem;
     border-radius: 0;
   }
   &:hover {
-    color: $clr-black;
-    text-decoration: none;
     img {
       opacity: 0.75;
+    }
+  }
+}
+
+.search-bar {
+  background: $clr-search;
+  .search-div {
+    .search-icon,
+    .search-text {
+      background: transparent;
+    }
+    .search-btn {
+      transition: 0.5s;
+      &:hover {
+        color: $clr-white;
+        background: $clr-black;
+      }
     }
   }
 }
@@ -91,17 +97,7 @@ body {
 footer {
   .smicon {
     @include htwt(2rem, 2rem);
-    justify-content: center;
-    align-items: center;
     border: 2px solid;
-
-    a {
-      text-align: center;
-      text-decoration: none;
-      &:visited {
-        text-decoration: none;
-      }
-    }
 
     @include borderIcon("fa", $faClr);
     @include borderIcon("ig", $igClr);

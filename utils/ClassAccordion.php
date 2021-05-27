@@ -14,7 +14,7 @@ function AccordionConst($arr)
     foreach ($arr as $num => $val) {
         $str = implode("\n", array_map(function ($foo) use ($currPage) {
             $link = "$currPage?class=$foo";
-            return '<li class="accordion-link"><a href="' . $link . '">' . $foo . '</a></li>';
+            return '<li class="accordion-link list-unstyled"><a href="' . $link . '">' . $foo . '</a></li>';
         }, $val[1]));
         $str2 = ($num == 0) ? "show" : "";
         echo <<<EOD

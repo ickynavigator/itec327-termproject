@@ -10,6 +10,7 @@ body {
 
 body {
   position: relative;
+  font-family: "Montserrat", sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -20,7 +21,6 @@ body {
 
 .navbar {
   font-family: "Montserrat", sans-serif;
-  padding: 1rem 0;
 }
 
 .navbar .active {
@@ -48,7 +48,6 @@ body {
 
 .navbar a[role="button"] {
   background-color: #eb4a36;
-  text-decoration: none;
   color: #ffffff !important;
 }
 
@@ -56,76 +55,66 @@ body {
   color: #2d0320ff !important;
 }
 
-.navbar .dropdown {
-  float: left;
+.accordion-link {
+  font-family: "Montserrat", sans-serif;
 }
 
-.navbar .dropdown .dropdown-toggle {
-  float: left;
-  font-size: 1rem;
-  color: #2d0320ff !important;
-  padding: 0.875rem 1rem;
+.accordion-link a {
   text-decoration: none;
-  margin: 0;
-  border: none;
-  outline: none;
-  font-family: inherit;
+  color: #2d0320ff;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
-.navbar .dropdown .dropdown-menu a {
-  float: left;
-  font-size: 1rem;
-  color: #2d0320ff !important;
-  padding: 0.875rem 1rem;
+.accordion-link a:visited {
   text-decoration: none;
-  margin: 0;
 }
 
-.navbar .dropdown .dropdown-menu a:hover, .navbar .dropdown .dropdown-menu a:focus {
-  background-color: #aaa1c8ff;
+.accordion-link a:focus, .accordion-link a:hover {
+  padding: 0 1.25rem;
+  text-decoration: underline;
+  color: #eb4a36;
 }
 
 .recipe-card {
-  color: #000000;
-  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
   border: 1px solid #eb4a36;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .recipe-card img {
-  width: inherit;
-  height: 7rem;
-  background: #eb4a36;
+  height: 10rem;
   border-radius: 0;
-}
-
-.recipe-card:hover {
-  color: #000000;
-  text-decoration: none;
 }
 
 .recipe-card:hover img {
   opacity: 0.75;
 }
 
+.search-bar {
+  background: #e6e6e6;
+}
+
+.search-bar .search-div .search-icon,
+.search-bar .search-div .search-text {
+  background: transparent;
+}
+
+.search-bar .search-div .search-btn {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.search-bar .search-div .search-btn:hover {
+  color: #ffffff;
+  background: #000000;
+}
+
 footer .smicon {
   height: 2rem;
   width: 2rem;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   border: 2px solid;
-}
-
-footer .smicon a {
-  text-align: center;
-  text-decoration: none;
-}
-
-footer .smicon a:visited {
-  text-decoration: none;
 }
 
 footer .smicon-fa {

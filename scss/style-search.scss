@@ -1,25 +1,4 @@
 @import "./vars.scss";
 .main-div {
   font-family: $sans-ser;
-  .search-bar {
-    border: none;
-    border-radius: 5px;
-    background: $clr-search;
-    .search-div {
-      margin: 0 !important;
-      .search-icon,
-      .search-text {
-        margin: 0 !important;
-        background: transparent;
-        border: none;
-      }
-      .search-btn {
-        transition: 0.5s;
-        &:hover {
-          color: $clr-white;
-          background: $clr-black;
-        }
-      }
-    }
-  }
 }

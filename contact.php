@@ -26,13 +26,13 @@ include("./utils/func.php");
                 </p>
                 <br />
                 <a href="tel:+905338604139">
-                    <button type="button" class="btn rounded-pill px-4 py-2">
+                    <button type="button" class="btn rounded-pill text-light border-0 px-4 py-2">
                         Schedule a call
                     </button>
                 </a>
             </div>
         </div>
-        <div class="col rightDiv mx-3 mt-5 mt-md-0 py-sm-3 py-md-4">
+        <div class="col rightDiv text-light mx-3 mt-5 mt-md-0 py-sm-3 py-md-4">
             <form class="container-fluid" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <div class="my-3">
                     <label for="nameInp" class="form-label">Name</label>
@@ -47,7 +47,7 @@ include("./utils/func.php");
                     <textarea class="form-control" id="messageInp" name="messageInp" rows="5"></textarea>
                 </div>
                 <div class="my-3 text-center">
-                    <input type="submit" class="rounded-pill px-4 py-2 btn" name="sbmt" value="Send Message">
+                    <input type="submit" class="bg-light rounded-pill border-0 px-4 py-2 btn" name="sbmt" value="Send Message">
                 </div>
             </form>
             <?php

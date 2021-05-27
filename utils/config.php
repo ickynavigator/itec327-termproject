@@ -67,6 +67,18 @@ function searchQueryJSON($column, $search, $sub = "")
     return idQuery($query);
 }
 
+function searchQueryRange($column, $Min = 0, $Max = 0)
+{
+    $minVal = ($Min > 0) ? $Min : 0;
+    $maxVal = ($Max > 0) ? $Max : "MAX(`$column`)";
+    $query = <<<EOD
+        SELECT  `id`
+        FROM    `recipes`
+        WHERE   `$column` BETWEEN $minVal AND $maxVal;
+    EOD;
+    return idQuery($query);
+}
+
 function recipeQuery($id)
 {
     $arr = [];

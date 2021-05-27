@@ -53,8 +53,8 @@ class Recipe
         $stars = $this->StarRank();
 
         return <<<EOD
-        <a href="./recipe?id=$id" class="card recipe-card h-100" id="recipe-$id">
-            <img src="./images/$pic" class="card-img-top" alt="$nm">
+        <a href="./recipe?id=$id" class="card recipe-card h-100 text-decoration-none link-dark" id="recipe-$id">
+            <img src="./images/$pic" class="card-img-top w-100" alt="$nm">
             <div class="card-body">
                 $stars
                 <h5 class="card-title">$nm</h5>
@@ -186,11 +186,11 @@ class Recipe
         $class = $this->class;
 
         $tagTxt = implode("\n", array_map(function ($foo) {
-            return '<a class="btn btn-primary my-2 recipe-tag rounded-pill" href="#" role="button">' . $foo . '</a>';
+            return '<a class="btn btn-primary my-2 recipe-tag rounded-pill border-0" href="#" role="button">' . $foo . '</a>';
         }, $tag));
 
         $classTxt = implode("\n", array_map(function ($foo) {
-            return '<a class="btn btn-success my-2 recipe-tag rounded-pill" href="#" role="button">' . $foo . '</a>';
+            return '<a class="btn btn-success my-2 recipe-class rounded-pill border-0" href="#" role="button">' . $foo . '</a>';
         }, $class));
 
         echo <<<EOD

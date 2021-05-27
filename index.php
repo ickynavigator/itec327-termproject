@@ -16,8 +16,8 @@ include("./utils/func.php");
 
 <body>
     <?php include("./utils/navbar.php"); ?>
-    <div class="banner">
-        <div class="banner-text">
+    <div class="banner d-flex p-3 mt-md-0 my-md-auto">
+        <div class="banner-text text-light p-sm-3 p-md-0 my-md-auto mx-md-0">
             <h1>
                 <strong>
                     Choose from thousands of recipes
@@ -28,7 +28,7 @@ include("./utils/func.php");
             </span>
             </br>
             </br>
-            <a href="./addRecipe.php">Add a recipe today <i class="fas fa-arrow-right"></i></a>
+            <a href="./addRecipe.php" class="text-light">Add a recipe today <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <br />
@@ -71,8 +71,8 @@ include("./utils/func.php");
                 </div>
             </div>
         </div>
-        <div class="newsBox container d-flex flex-column">
-            <h2 class="newsText">
+        <div class="newsBox container d-flex flex-column text-center justify-content-center align-items-center">
+            <h2 class="newsText text-light py-3 px-0">
                 Be the first to know about the latest deals, receive new trending recipes & more!
             </h2>
             <form class="container-fluid row newsInput" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -81,7 +81,7 @@ include("./utils/func.php");
                     <input type="email" class="form-control rounded-pill" id="inputEmail" name="inputEmail" placeholder="Email">
                 </div>
                 <div class="col-md-3 py-3">
-                    <input type="submit" name="sbmt" value="Subscribe" class="btn rounded-pill">
+                    <input type="submit" name="sbmt" value="Subscribe" class="btn rounded-pill bg-light">
                 </div>
             </form>
             <?php

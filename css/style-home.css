@@ -1,21 +1,11 @@
 .banner {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   border-radius: 2rem;
   background: url("../../images/header.jpeg");
 }
 
-@media (min-width: 375px) {
-  .banner {
-    padding: 1rem;
-  }
-}
-
 @media (min-width: 768px) {
   .banner {
-    margin: 0 auto;
-    padding: 5rem;
+    padding: 5rem !important;
     height: auto;
     width: inherit;
   }
@@ -23,7 +13,6 @@
 
 .banner .banner-text {
   font-family: "Montserrat", sans-serif;
-  color: #ffffff;
 }
 
 .banner .banner-text h1 {
@@ -32,7 +21,6 @@
 
 .banner .banner-text a {
   text-decoration: none;
-  color: #ffffff;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -46,81 +34,13 @@
   text-decoration: underline;
 }
 
-@media (min-width: 375px) {
-  .banner .banner-text {
-    padding: 1rem;
-  }
-}
-
 @media (min-width: 768px) {
   .banner .banner-text {
-    margin: auto 0;
     width: 30vw;
   }
 }
 
-.accordion-link {
-  font-family: "Montserrat", sans-serif;
-  list-style: none !important;
-}
-
-.accordion-link a {
-  text-decoration: none;
-  color: #2d0320ff;
-  -webkit-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
-}
-
-.accordion-link a:visited {
-  text-decoration: none;
-}
-
-.accordion-link a:focus, .accordion-link a:hover {
-  padding: 0 1.25rem;
-  text-decoration: underline;
-  color: #eb4a36;
-}
-
-.rightDiv {
-  font-family: "Montserrat", sans-serif;
-}
-
-.rightDiv .search-bar {
-  border: none;
-  border-radius: 5px;
-  background: #e6e6e6;
-}
-
-.rightDiv .search-bar .search-div {
-  margin: 0 !important;
-}
-
-.rightDiv .search-bar .search-div .search-icon,
-.rightDiv .search-bar .search-div .search-text {
-  margin: 0 !important;
-  background: transparent;
-  border: none;
-}
-
-.rightDiv .search-bar .search-div .search-btn {
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-}
-
-.rightDiv .search-bar .search-div .search-btn:hover {
-  color: #ffffff;
-  background: #000000;
-}
-
 .newsBox {
-  width: inherit;
-  text-align: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   border-radius: 20px;
   background: #eb4a36;
 }
@@ -135,11 +55,6 @@
   .newsBox {
     padding: 3rem 12.5rem;
   }
-}
-
-.newsBox .newsText {
-  color: #ffffff;
-  padding: 1rem 0;
 }
 
 .newsBox .newsInput input[type="email"] {
@@ -164,7 +79,8 @@
 }
 
 .newsBox .newsInput input[type="submit"] {
-  background: #ffffff;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .newsBox .newsInput input[type="submit"]:hover, .newsBox .newsInput input[type="submit"]:focus {

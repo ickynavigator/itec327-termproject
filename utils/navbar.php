@@ -28,7 +28,7 @@ function navPrint($currPage, $navArr, $dropArr)
 }
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-body">
+<nav class="navbar navbar-expand-lg navbar-light bg-body py-3 px-0">
     <div class="container-fluid">
         <a class="navbar-brand" href="./index.php">
             <img src="./images/fox.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
@@ -59,8 +59,8 @@ function navPrint($currPage, $navArr, $dropArr)
             </ul>
             <ul class="nav navbar-nav ml-auto align-items-center">
                 <li>
-                    <a class="btn rounded-pill" href="./addRecipe.php" role="button">
-                        <i class="fas fa-plus me-2"></i>Add Recipe
+                    <a class="btn rounded-pill" href="./addRecipe" role="button">
+                        <i class="fas fa-plus me-2 "></i>Add Recipe
                     </a>
                 </li>
             </ul>

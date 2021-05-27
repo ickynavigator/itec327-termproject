@@ -23,6 +23,34 @@
  */
 function recipeParse(obj) {
   let out = `
+DROP TABLE IF EXISTS \`newsletter\`;
+CREATE TABLE \`newsletter\` (
+    \`id\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    \`email\` VARCHAR(256)
+);
+DROP TABLE IF EXISTS \`contact\`;
+CREATE TABLE \`contact\` (
+    \`id\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    \`name\` VARCHAR(256),
+    \`email\` VARCHAR(256),
+    \`message\` TEXT
+);
+DROP TABLE IF EXISTS \`recipes\`;
+CREATE TABLE \`recipes\` (
+  \`id\` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  \`name\` VARCHAR(256) NOT NULL,
+  \`description\` TEXT,
+  \`calories\` INT,
+  \`difficulty\` INT,
+  \`rating\` INT,
+  \`timeToPrep\` INT,
+  \`timeToCook\` INT,
+  \`tag\` JSON,
+  \`class\` JSON,
+  \`image\` JSON,
+  \`ingredient\` JSON,
+  \`steps\` JSON
+);
 INSERT INTO \`recipes\` (
   \`name\`,
   \`description\`,
@@ -56,7 +84,8 @@ INSERT INTO \`recipes\` (
   '${JSON.stringify(curr.steps).replace(/\\/g, "")}'
 )` + (ind + 1 < obj.length ? ",\n" : ";");
   });
-  document.getElementById("output").innerText = out;
+  // document.getElementById("output").innerText = out;
+  return out;
 }
 
 document.getElementById("jsonFile").addEventListener(
@@ -68,7 +97,15 @@ document.getElementById("jsonFile").addEventListener(
       var reader = new FileReader();
       reader.addEventListener("load", (loadEvent) => {
         // @ts-ignore
-        recipeParse(JSON.parse(loadEvent.target.result));
+        let recipes = recipeParse(JSON.parse(loadEvent.target.result));
+        const file = new Blob([recipes], { type: "text/plain" });
+        const fileURL = URL.createObjectURL(file);
+        // create the link
+        const linkElement = document.createElement("a");
+        linkElement.setAttribute("href", fileURL);
+        linkElement.setAttribute("download", "init.sql");
+        linkElement.innerHTML = "<button>Download me</button>";
+        document.querySelector(".downloadDiv").appendChild(linkElement);
       });
       reader.readAsText(jsonFile);
       // @ts-ignore

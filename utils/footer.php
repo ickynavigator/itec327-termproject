@@ -4,8 +4,8 @@ function IconPrint($arr)
     // [...["icon Name", "icon class", "icon link"]] : arr
     foreach ($arr as $val) {
         echo <<<EOD
-        <div class="col smicon smicon-$val[0] rounded-pill d-inline-flex mx-1">
-            <a href="$val[2]" class="d-inline-flex">
+        <div class="col smicon smicon-$val[0] rounded-pill d-inline-flex mx-1 justify-content-center align-items-center">
+            <a href="$val[2]" class="d-inline-flex text-center text-decoration-none">
                 <i class="$val[1]"></i>
             </a>
         </div>
