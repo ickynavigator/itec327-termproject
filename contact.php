@@ -1,5 +1,7 @@
-<?php include("./utils/config.php"); ?>
-<?php include("./utils/func.php"); ?>
+<?php
+include("./utils/config.php");
+include("./utils/func.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,23 +33,42 @@
             </div>
         </div>
         <div class="col rightDiv mx-3 mt-5 mt-md-0 py-sm-3 py-md-4">
-            <form class="container-fluid">
+            <form class="container-fluid" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <div class="my-3">
                     <label for="nameInp" class="form-label">Name</label>
-                    <input type="text" class="form-control rounded-pill" id="nameInp">
+                    <input type="text" class="form-control rounded-pill" id="nameInp" name="nameInp">
                 </div>
                 <div class="my-3">
                     <label for="emailInp" class="form-label">Email</label>
-                    <input type="email" class="form-control rounded-pill" id="emailInp">
+                    <input type="email" class="form-control rounded-pill" id="emailInp" name="emailInp">
                 </div>
                 <div class="my-3">
                     <label for="messageInp" class="form-label">Message</label>
-                    <textarea class="form-control" id="messageInp" rows="5"></textarea>
+                    <textarea class="form-control" id="messageInp" name="messageInp" rows="5"></textarea>
                 </div>
                 <div class="my-3 text-center">
-                    <input type="submit" class="rounded-pill px-4 py-2 btn" value="Send Message">
+                    <input type="submit" class="rounded-pill px-4 py-2 btn" name="sbmt" value="Send Message">
                 </div>
             </form>
+            <?php
+            if (isset($_REQUEST['sbmt'])) {
+                $name = filter_input(INPUT_POST, 'nameInp');
+                $email = filter_input(INPUT_POST, 'emailInp', FILTER_VALIDATE_EMAIL);
+                $message = filter_input(INPUT_POST, 'messageInp');
+
+                if ($name && $email && $message) {
+                    echo "<h1 class='text-center'>";
+                    if (newContactMessage($name, $email, $message)) {
+                        echo "Message sent";
+                    } else {
+                        echo "Message not sent";
+                    }
+                    echo "</h1>";
+                    $url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+                    header("Location: $url");
+                }
+            }
+            ?>
         </div>
     </div>
     <?php include("./utils/footer.php"); ?>

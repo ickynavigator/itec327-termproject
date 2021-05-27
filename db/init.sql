@@ -1,3 +1,15 @@
+DROP TABLE IF EXISTS `newsletter`;
+CREATE TABLE `newsletter` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `email` VARCHAR(256)
+);
+DROP TABLE IF EXISTS `contact`;
+CREATE TABLE `contact` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(256),
+    `email` VARCHAR(256),
+    `message` TEXT
+);
 DROP TABLE IF EXISTS `recipes`;
 CREATE TABLE `recipes` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -135,6 +135,34 @@ function recipesArray($idArr = [])
     );
 }
 
+function newContactMessage($name = "", $email = "", $message = "")
+{
+    $query = <<<EOD
+        INSERT INTO `contact`(
+                `name`,
+                `email`,
+                `message`
+            ) VALUES (
+                "$name",
+                "$email",
+                "$message"
+            )
+    EOD;
+    return $GLOBALS["conn"]->query($query);
+}
+
+function newNewsletter($email = "")
+{
+    $query = <<<EOD
+        INSERT INTO `newsletter`(
+                `email`
+            ) VALUES (
+                "$email"
+            )
+    EOD;
+    return $GLOBALS["conn"]->query($query);
+}
+
 $successTXT = <<<EOD
     Success: A proper connection to MySQL was made.
     </br>
