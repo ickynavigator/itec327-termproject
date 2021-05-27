@@ -4,7 +4,7 @@ function console_log($data)
     echo '<script>console.log(' . json_encode($data) . ')</script>';
 }
 
-if ($_SERVER['build'] === "heroku") {
+if (getenv('build') === "production") {
     $db_host = getenv('db_host');
     $db_user = getenv('db_user');
     $db_password = getenv('db_password');
