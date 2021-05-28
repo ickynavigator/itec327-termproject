@@ -96,6 +96,20 @@ body {
   background: #e6e6e6;
 }
 
+@media (min-width: 375px) {
+  .search-bar .SearchRange,
+  .search-bar .SearchType {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .search-bar .SearchRange,
+  .search-bar .SearchType {
+    width: 15%;
+  }
+}
+
 .search-bar .search-div .search-icon,
 .search-bar .search-div .search-text {
   background: transparent;

@@ -79,6 +79,17 @@ body {
 
 .search-bar {
   background: $clr-search;
+
+  .SearchRange,
+  .SearchType {
+    @include sm {
+      width: 100%;
+    }
+    @include md {
+      width: 15%;
+    }
+  }
+
   .search-div {
     .search-icon,
     .search-text {

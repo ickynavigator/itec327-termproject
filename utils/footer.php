@@ -52,4 +52,4 @@ function IconPrint($arr)
 </script>
 
 <!-- My scripts  -->
-<script src="./js/index.js"></script>
+<!-- <script src="./js/index.js"></script> -->

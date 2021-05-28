@@ -100,7 +100,6 @@ document.getElementById("jsonFile").addEventListener(
         let recipes = recipeParse(JSON.parse(loadEvent.target.result));
         const file = new Blob([recipes], { type: "text/plain" });
         const fileURL = URL.createObjectURL(file);
-        // create the link
         const linkElement = document.createElement("a");
         linkElement.setAttribute("href", fileURL);
         linkElement.setAttribute("download", "init.sql");

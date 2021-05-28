@@ -5,19 +5,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sql Parser</title>
+    <title>JSON TO SQL FORMATTER</title>
+    <style>
+        .type {
+            font-weight: bold;
+            color: blue;
+        }
+
+        .downloadDiv {
+            padding-top: 3rem
+        }
+    </style>
 </head>
 
 <body>
+    <!-- <h1>JSON TO SQL FORMATTER</h1> -->
+    <pre><div><h3>Upload an array of objects with the Schema</h3>{
+    name: <span class="type">string</span>,
+    description: <span class="type">string</span>,
+    calories: <span class="type">number</span>,
+    difficulty: <span class="type">number</span>,
+    rating: <span class="type">number</span>,
+    timeToPrep: <span class="type">number</span>,
+    timeToCook: <span class="type">number</span>,
+    tag: <span class="type">string[]</span>,
+    class: <span class="type">string[]</span>,
+    image: <span class="type">string[]</span>,
+    ingredient: {
+        amount: <span class="type">number</span>,
+        unit: <span class="type">string</span>,
+        name: <span class="type">string</span>,
+    }<span class="type">[]</span>,
+    steps: {
+        description: <span class="type">string</span>,
+        stepPicture: <span class="type">string</span>,
+    }<span class="type">[]</span>
+}<span class="type">[]</span>
+<h3>Generates SQL as</h3>(
+  <span class="type">name</span>,
+  <span class="type">description</span>,
+  <span class="type">calories</span>,
+  <span class="type">difficulty</span>,
+  <span class="type">rating</span>,
+  <span class="type">timeToPrep</span>,
+  <span class="type">timeToCook</span>,
+  <span class="type">tag</span>,
+  <span class="type">class</span>,
+  <span class="type">image</span>,
+  <span class="type">ingredient</span>,
+  <span class="type">steps</span>
+)
+    </div></pre>
     <form>
-        <input type="file" id="jsonFile" name="jsonFile" />
+        <h3>Upload the Json file</h3>
+        <input type="file" id="jsonFile" name="jsonFile" accept="application/JSON" />
     </form>
-    <div>
-        <pre><code id="output"></code></pre>
-    </div>
     <div class="downloadDiv"></div>
-
-
     <script src="./parse.js"></script>
 </body>
 

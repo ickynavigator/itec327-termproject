@@ -186,11 +186,11 @@ class Recipe
         $class = $this->class;
 
         $tagTxt = implode("\n", array_map(function ($foo) {
-            return '<a class="btn btn-primary my-2 recipe-tag rounded-pill border-0" href="#" role="button">' . $foo . '</a>';
+            return '<a class="btn btn-primary my-2 recipe-tag rounded-pill border-0" href="./?tag=' . $foo . '" role="button">' . $foo . '</a>';
         }, $tag));
 
         $classTxt = implode("\n", array_map(function ($foo) {
-            return '<a class="btn btn-success my-2 recipe-class rounded-pill border-0" href="#" role="button">' . $foo . '</a>';
+            return '<a class="btn btn-success my-2 recipe-class rounded-pill border-0" href="./?class=' . $foo . '" role="button">' . $foo . '</a>';
         }, $class));
 
         echo <<<EOD

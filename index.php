@@ -28,7 +28,7 @@ include("./utils/func.php");
             </span>
             </br>
             </br>
-            <a href="./addRecipe.php" class="text-light">Add a recipe today <i class="fas fa-arrow-right"></i></a>
+            <a href="./addRecipe" class="text-light">Add a recipe today <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <br />
@@ -49,10 +49,11 @@ include("./utils/func.php");
             <div class="col-md-9 rightDiv mb-3">
                 <div class="row row-cols-2 row-cols-md-4 g-1 g-md-3 mt-1 h-100">
                     <?php
-                    $uri = parse_url($_SERVER['REQUEST_URI']);
-                    parse_str($uri['query'], $params);
+                    // $uri = parse_url($_SERVER['REQUEST_URI']);
+                    parse_str(parse_url($_SERVER['REQUEST_URI'])['query'], $params);
                     if (!empty($params)) {
-                        $idArr = searchQuery("class", $params["class"]);
+                        $key = array_keys($params)[0];
+                        $idArr = searchQuery($key, $params[$key]);
                         if ($idArr !== "error") {
                             foreach (recipesArray($idArr) as $val) {
                                 echo "<div class='col d-inline'>" . $val->CardBox() . "</div>";

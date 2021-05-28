@@ -45,9 +45,9 @@ function navPrint($currPage, $navArr, $dropArr)
                 navPrint(
                     $pageName,
                     [
-                        ["home", "Home",  "./index.php"],
-                        ["search", "Search",  "./search.php"],
-                        ["contact", "Contact Us",  "./contact.php"]
+                        ["home", "Home",  "./index"],
+                        ["search", "Search",  "./search"],
+                        ["contact", "Contact Us",  "./contact"]
                     ],
                     [
                         ["Action", "#"],

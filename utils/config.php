@@ -69,8 +69,8 @@ function searchQueryJSON($column, $search, $sub = "")
 
 function searchQueryRange($column, $Min = 0, $Max = 0)
 {
-    $minVal = ($Min > 0) ? $Min : 0;
-    $maxVal = ($Max > 0) ? $Max : "MAX(`$column`)";
+    $minVal = ($Min > 0) ? $Min : "(SELECT MIN(`$column`))";
+    $maxVal = ($Max > 0) ? $Max : "(SELECT MAX(`$column`))";
     $query = <<<EOD
         SELECT  `id`
         FROM    `recipes`
