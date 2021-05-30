@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * A Recipe class to hold the recipes
+ */
 class Recipe
 {
     private $id = 0;
@@ -284,6 +288,16 @@ class Recipe
 
 
 // functions
+
+/**
+ * Convert a number to a fraction from
+ * a float value
+ * 
+ * @param float $n
+ * @param float $tolerance 
+ * 
+ * @return string
+ */
 function float2rat($n, $tolerance = 1.e-6)
 {
     $h1 = 1;
@@ -304,4 +318,86 @@ function float2rat($n, $tolerance = 1.e-6)
     } while (abs($n - $h1 / $k1) > $n * $tolerance);
 
     return "$h1/$k1";
+}
+
+/**
+ * Remove a query string parameter from an URL.
+ *
+ * @param string $url
+ * @param string $varname
+ *
+ * @return string
+ */
+function removeQueryStringParameter($varname)
+{
+    $url = $_SERVER['REQUEST_URI'];
+    $parsedUrl = parse_url($url);
+    $query = array();
+
+    if (isset($parsedUrl['query'])) {
+        parse_str($parsedUrl['query'], $query);
+        unset($query[$varname]);
+    }
+
+    $path = isset($parsedUrl['path']) ? $parsedUrl['path'] : '';
+    $query = !empty($query) ? '?' . http_build_query($query) : '';
+
+    return $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . $path . $query;
+}
+
+/**
+ * Remove a query string parameter from an URL.
+ *
+ * @param string $url
+ * @param string $varname
+ *
+ * @return string
+ */
+function changeQueryStringParameter($varname, $amount)
+{
+    $uri = $_SERVER['REQUEST_URI'];
+    $parsedUrl = parse_url($uri);
+    $query = array();
+
+    if (isset($parsedUrl['query'])) {
+        parse_str($parsedUrl['query'], $query);
+        $query[$varname] = $amount;
+    }
+
+    $path = isset($parsedUrl['path']) ? $parsedUrl['path'] : '';
+    $query = !empty($query) ? '?' . http_build_query($query) : '';
+
+    return $parsedUrl['scheme']  . $parsedUrl['host'] . $path . $query;
+}
+
+/**
+ * Create A pagination list
+ * 
+ * @param int $pg
+ * @param int $totalPg
+ */
+function paginate($pg, $totalPg)
+{
+    // $val = changeQueryStringParameter($uri, 'pageno', $pg-1);
+    $prev = (($pg <= 1) ? "#" : (changeQueryStringParameter('pageno', $pg - 1)));
+    $next = (($pg >= $totalPg) ? '#' : (changeQueryStringParameter('pageno', $pg + 1)));
+
+    $prevDisabled = (($pg <= 1) ? 'disabled' : '');
+    $nextDisabled = (($pg >= $totalPg) ? 'disabled' : '');
+    echo "
+        <ul class='pagination'>
+            <li>
+                <a href='?pageno=" . changeQueryStringParameter('pageno', 1) . "'>First</a>
+            </li>
+            <li class='" . $prevDisabled . "'>
+                <a href='" . $prev . "'>Prev</a>
+            </li>
+            <li class='" . $nextDisabled . "'>
+                <a href='" . $next . "'>Next</a>
+            </li>
+            <li>
+                <a href='" . changeQueryStringParameter('pageno', $totalPg) . "'>Last</a>
+            </li>
+        </ul>
+    ";
 }

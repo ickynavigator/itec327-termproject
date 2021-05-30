@@ -1,4 +1,4 @@
-<form class="d-block d-md-flex search-bar rounded" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<form class="d-block d-md-flex search-bar rounded" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <select class="form-select SearchType" name="SearchType">
         <option value="name">Name</option>
         <option value="tag">Tag</option>
@@ -15,7 +15,7 @@
         </button>
     </div>
 </form>
-<form class="d-block d-md-flex search-bar rounded mt-3" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<form class="d-block d-md-flex search-bar rounded mt-3" method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <select class="form-select SearchRange" name="SearchRange" id="SearchRange">
         <option value="calories">Calories </option>
         <option value="difficulty">Difficulty</option>
@@ -31,34 +31,47 @@
 </form>
 <div class="row row-cols-sm-2 row-cols-md-4 mt-1 g-2 g-lg-3">
     <?php
-    $idArray = randomRecipeIds(20);
-    shuffle($idArray);
+    $url = $_SERVER['REQUEST_URI'];
+    $url_components = parse_url($url);
+    parse_str($url_components['query'], $params);
+    $pgNo = ($params['pageno']) ? $params['pageno'] : 1;
 
-    if (isset($_POST['sbmtSearch'])) {
-        $type = filter_input(INPUT_POST, 'SearchType');
-        $search = filter_input(INPUT_POST, 'Search');
+    if (!isset($_GET['sbmtSearch']) || !isset($_GET['sbmtRange'])) {
+        $idArray = [randomRecipeIds(20)];
+        shuffle($idArray[0]);
+    }
+
+    if (isset($_GET['sbmtSearch'])) {
+        $type = filter_input(INPUT_GET, 'SearchType');
+        $search = filter_input(INPUT_GET, 'Search');
         if ($type === "name" || $type === "tag" || $type === "class") {
-            $idArray = searchQuery($type, $search);
+            $idArray = searchQuery($type, $search, $pgNo);
         } else {
-            $idArray = searchQueryJSON($type, $search, "name");
+            $idArray = searchQueryJSON($type, $search, $pgNo, "name");
         }
     }
 
-    if (isset($_POST['sbmtRange'])) {
-        $type = filter_input(INPUT_POST, 'SearchRange');
-        $Min = filter_input(INPUT_POST, 'Min', FILTER_VALIDATE_INT);
-        $Max = filter_input(INPUT_POST, 'Max', FILTER_VALIDATE_INT);
+    if (isset($_GET['sbmtRange'])) {
+        $type = filter_input(INPUT_GET, 'SearchRange');
+        $Min = filter_input(INPUT_GET, 'Min', FILTER_VALIDATE_INT);
+        $Max = filter_input(INPUT_GET, 'Max', FILTER_VALIDATE_INT);
         $Val1 = ($Min) ? $Min : 0;
         $Val2 = ($Max) ? $Max : 0;
-        $idArray = searchQueryRange($type, $Val1, $Val2);
+        $idArray = searchQueryRange($type, $pgNo, $Val1, $Val2);
     }
 
-    if ($idArray === "error") {
-        echo "<div class='h-100 w-100 d-flex align-items-center'><h1>No Recipes meet the specified criteria</h1></div>";
+    if ($idArray[0] === "error") {
+        echo "<div class='h-100 w-100 d-flex align-items-center'>
+                <h1>No Recipes meet the specified criteria</h1>
+            </div>";
     } else {
-        foreach (recipesArray($idArray) as $val) {
+        foreach (recipesArray($idArray[0]) as $val) {
             echo "<div class='col d-inline'>" . $val->CardBox() . "</div>";
         }
+        echo "<h1>" . $pgNo . $idArray[1] . "</h1>";
+        echo "<div class='h-100 w-100 d-flex align-items-center'>" .
+            paginate($pgNo, $idArray[1])
+            . "</div>";
     }
     ?>
 </div>
