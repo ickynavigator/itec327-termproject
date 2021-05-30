@@ -32,19 +32,6 @@ if ($conn->connect_error) {
     exit();
 }
 
-function countPages($pageNo = 1)
-{
-    $recordPerPage = 20;
-    $offset = ($pageNo - 1) * $recordPerPage;
-
-    $sql = "SELECT COUNT(*) as cnt FROM `recipes`";
-    $res = $GLOBALS["conn"]->query($sql);
-    $totalRows = $res->fetch_assoc()[0];
-    $totalPages =  ceil($totalRows / $pageNo);
-
-    return [(($totalRows > $recordPerPage) ? `` : `LIMIT $offset, $totalPages`), $totalPages];
-}
-
 function idQuery($query)
 {
     $res = $GLOBALS["conn"]->query($query);
@@ -59,43 +46,37 @@ function idQuery($query)
     return $arr;
 }
 
-function searchQuery($column, $search, $pg = 1)
+function searchQuery($column, $search)
 {
-    $pgLimit = countPages($pg)[0];
     $query = <<<EOD
         SELECT  `id`
         FROM    `recipes`
         WHERE   lower(`$column`) LIKE lower('%$search%');
-        $pgLimit;
     EOD;
-    return [idQuery($query), countPages($pg)[1]];
+    return idQuery($query);
 }
 
-function searchQueryJSON($column, $search, $pg = 1, $sub = "")
+function searchQueryJSON($column, $search, $sub = "")
 {
-    $pgLimit = countPages($pg)[0];
     $add =  ($sub === "") ? "" : ".$sub";
     $query = <<<EOD
         SELECT  `id`
         FROM    `recipes`
         WHERE   JSON_SEARCH(`$column`, 'all', '%$search%', NULL, '$[*]$add') IS NOT NULL
-        $pgLimit;
     EOD;
-    return [idQuery($query), countPages($pg)[1]];
+    return idQuery($query);
 }
 
-function searchQueryRange($column, $pg = 1, $Min = 0, $Max = 0)
+function searchQueryRange($column, $Min = 0, $Max = 0)
 {
-    $pgLimit = countPages($pg)[0];
     $minVal = ($Min > 0) ? $Min : "(SELECT MIN(`$column`))";
     $maxVal = ($Max > 0) ? $Max : "(SELECT MAX(`$column`))";
     $query = <<<EOD
         SELECT  `id`
         FROM    `recipes`
-        WHERE   `$column` BETWEEN $minVal AND $maxVal
-        $pgLimit;
+        WHERE   `$column` BETWEEN $minVal AND $maxVal;
     EOD;
-    return [idQuery($query), countPages($pg)[1]];
+    return idQuery($query);
 }
 
 function recipeQuery($id)
