@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A FORMATTER FOR MY JSON USED TO CREATE MY INIT.SQL FILE" />
     <title>JSON TO SQL FORMATTER</title>
     <style>
         .type {
@@ -12,14 +13,13 @@
             color: blue;
         }
 
-        .downloadDiv {
-            padding-top: 3rem
+        .downloadDiv button {
+            margin: 2rem 0
         }
     </style>
 </head>
 
 <body>
-    <!-- <h1>JSON TO SQL FORMATTER</h1> -->
     <pre><div><h3>Upload an array of objects with the Schema</h3>{
     name: <span class="type">string</span>,
     description: <span class="type">string</span>,
@@ -56,9 +56,13 @@
   <span class="type">steps</span>
 )
     </div></pre>
+    <h3>Fake JSON generated at <a href="https://json-schema-faker.js.org/">json-schema-faker</a></h3>
+    <a href="./schema.json" download="schema.json"><button>Download my Schema file(JSON)</button></a>
     <form>
-        <h3>Upload the Json file</h3>
-        <input type="file" id="jsonFile" name="jsonFile" accept="application/JSON" />
+        <label>
+            <h3>Upload the Json file</h3>
+            <input type="file" id="jsonFile" name="jsonFile" accept="application/JSON" />
+        </label>
     </form>
     <div class="downloadDiv"></div>
     <script src="./parse.js"></script>

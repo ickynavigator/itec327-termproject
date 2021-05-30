@@ -22,6 +22,7 @@
  * }[]} obj
  */
 function recipeParse(obj) {
+  let recipeCount = obj.length;
   let out = `
 DROP TABLE IF EXISTS \`newsletter\`;
 CREATE TABLE \`newsletter\` (
@@ -82,10 +83,10 @@ INSERT INTO \`recipes\` (
   '${JSON.stringify(curr.image).replace(/\\/g, "")}',
   '${JSON.stringify(curr.ingredient).replace(/\\/g, "")}',
   '${JSON.stringify(curr.steps).replace(/\\/g, "")}'
-)` + (ind + 1 < obj.length ? ",\n" : ";");
+)` + (ind + 1 < recipeCount ? ",\n" : ";");
   });
   // document.getElementById("output").innerText = out;
-  return out;
+  return { out, recipeCount };
 }
 
 document.getElementById("jsonFile").addEventListener(
@@ -96,14 +97,16 @@ document.getElementById("jsonFile").addEventListener(
     (function readJsonFile(jsonFile) {
       var reader = new FileReader();
       reader.addEventListener("load", (loadEvent) => {
-        // @ts-ignore
-        let recipes = recipeParse(JSON.parse(loadEvent.target.result));
-        const file = new Blob([recipes], { type: "text/plain" });
+        const { out: sqlFormatted, recipeCount } = recipeParse(
+          // @ts-ignore
+          JSON.parse(loadEvent.target.result)
+        );
+        const file = new Blob([sqlFormatted], { type: "text/plain" });
         const fileURL = URL.createObjectURL(file);
         const linkElement = document.createElement("a");
         linkElement.setAttribute("href", fileURL);
         linkElement.setAttribute("download", "init.sql");
-        linkElement.innerHTML = "<button>Download me</button>";
+        linkElement.innerHTML = `<button>Download me (${recipeCount} Objects)</button>`;
         document.querySelector(".downloadDiv").appendChild(linkElement);
       });
       reader.readAsText(jsonFile);
