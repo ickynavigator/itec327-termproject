@@ -39,13 +39,6 @@ function navPrint($currPage, $navArr)
                 );
                 ?>
             </ul>
-            <ul class="nav navbar-nav ml-auto align-items-center">
-                <li>
-                    <a class="btn rounded-pill" href="./addRecipe" role="button">
-                        <i class="fas fa-plus me-2 "></i>Add Recipe
-                    </a>
-                </li>
-            </ul>
         </div>
     </div>
 </nav>

@@ -28,7 +28,6 @@ include("./utils/func.php");
             </span>
             </br>
             </br>
-            <a href="./addRecipe" class="text-light">Add a recipe today <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <br />
