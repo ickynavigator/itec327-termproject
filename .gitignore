@@ -2,5 +2,6 @@
 /vendor/
 snippets.txt
 /a_trash/
+a_trash.*
 test.*
 /.vscode/
