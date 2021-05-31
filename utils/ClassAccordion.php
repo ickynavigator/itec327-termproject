@@ -34,22 +34,3 @@ function AccordionConst($arr)
     }
     echo '</div>';
 }
-
-// Breakfast
-// Lunch
-// Beverages
-// Appetizers
-// Soups
-// Salads
-// Main dishes: Beef
-// Main dishes: Poultry
-// Main dishes: Pork
-// Main dishes: Seafood
-// Main dishes: Vegetarian
-// Side dishes: Vegetables
-// Side dishes: Other
-// Desserts
-// Canning / Freezing
-// Breads
-// Holidays
-// Entertaining

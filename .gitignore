@@ -4,5 +4,3 @@ snippets.txt
 /a_trash/
 test.*
 /.vscode/
-
-# git add . && git status && git commit --allow-empty -m "" && git pushall

@@ -3,7 +3,6 @@ function navPrint($currPage, $navArr)
 {
     // pageName
     // [...["page Name", "Page Title", "url"]] : navArr
-    // [...["DropDown Title", "url"]] : dropArr
     foreach ($navArr as $val) {
         $activeStr = ($currPage == $val[0]) ? ' active" aria-current="page' : '';
         echo <<<EOD
@@ -18,7 +17,7 @@ function navPrint($currPage, $navArr)
 <nav class="navbar navbar-expand-lg navbar-light bg-body py-3 px-0">
     <div class="container-fluid">
         <a class="navbar-brand" href="./index.php">
-            <img src="./images/fox.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="../images/fox.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
             Fox Recipe's
         </a>
 
@@ -32,19 +31,12 @@ function navPrint($currPage, $navArr)
                 navPrint(
                     $pageName,
                     [
-                        ["home", "Home",  "./index"],
-                        ["search", "Search",  "./search"],
-                        ["contact", "Contact Us",  "./contact"]
+                        ["admin", "Admin Page",  "./Admin/index"],
+                        ["search", "Search",  "./Admin/search"],
+                        ["logout", "Logout",  "./Admin/utils/logout"],
                     ]
                 );
                 ?>
-            </ul>
-            <ul class="nav navbar-nav ml-auto align-items-center">
-                <li>
-                    <a class="btn rounded-pill" href="./addRecipe" role="button">
-                        <i class="fas fa-plus me-2 "></i>Add Recipe
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

@@ -1,0 +1,14 @@
+table a {
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: black;
+}
+
+table a:visited {
+  text-decoration: none;
+}
+
+table a:focus, table a:hover {
+  text-decoration: underline;
+}

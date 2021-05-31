@@ -176,11 +176,16 @@ function newNewsletter($email = "")
 }
 
 $successTXT = <<<EOD
-    Success: A proper connection to MySQL was made.
-    </br>
-    Host information: $conn->host_info
-    </br>
-    Protocol version: $conn->protocol_version
+Success: A proper connection to MySQL was made.
+</br>
+Server Info: $conn->server_info
+</br>
+Client Info: $conn->client_info
+</br>
+Host information: $conn->host_info
+</br>
+Protocol version: $conn->protocol_version
 EOD;
+console_log($successTXT);
 
 // $conn->close();

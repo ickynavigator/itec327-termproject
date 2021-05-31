@@ -47,7 +47,7 @@ include("./utils/func.php");
                 </div>
             </div>
             <div class="col-md-9 rightDiv mb-3">
-                <div class="row row-cols-2 row-cols-md-4 g-1 g-md-3 mt-1 h-100">
+                <div class="row row-cols-2 row-cols-md-4 g-1 g-md-3 mt-1">
                     <?php
                     // $uri = parse_url($_SERVER['REQUEST_URI']);
                     parse_str(parse_url($_SERVER['REQUEST_URI'])['query'], $params);

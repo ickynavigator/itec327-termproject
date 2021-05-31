@@ -1,0 +1,16 @@
+@import "./vars";
+
+table {
+  a {
+    text-decoration: none;
+    transition: 0.5s;
+    color: black;
+    &:visited {
+      text-decoration: none;
+    }
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

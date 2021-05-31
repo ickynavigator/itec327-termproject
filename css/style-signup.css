@@ -1,0 +1,44 @@
+html,
+body {
+  height: 100%;
+}
+
+.leftDiv form input {
+  background: transparent;
+  border-width: 2px;
+}
+
+.leftDiv form input[type="submit"] {
+  border: none;
+  background: #eb4a36 !important;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.leftDiv form input[type="submit"]:hover, .leftDiv form input[type="submit"]:focus {
+  opacity: 0.75;
+}
+
+.leftDiv form input:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-color: #eb4a36;
+}
+
+.rightDiv {
+  border-radius: 1.5rem;
+  background: #eb4a36;
+  color: #ffffff;
+}
+
+.rightDiv button {
+  border: none;
+  background: #ffffff !important;
+  color: #000000;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.rightDiv button:hover, .rightDiv button:focus {
+  opacity: 0.75;
+}

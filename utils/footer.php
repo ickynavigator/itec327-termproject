@@ -16,12 +16,22 @@ function IconPrint($arr)
 </div>
 <footer class="container-fluid py-3">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-4">
             <a class="navbar-brand" href="./index.php">
                 <img src="./images/fox.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
                 Fox Recipe's
+                -
+            </a>
+
+            <a class="navbar-brand" href="./Admin/index.php">
+                -
+                Admin Page
             </a>
         </div>
+
+        <div class="col-md-5">
+        </div>
+
         <div class="col-auto row ms-lg-auto">
             <div class="row-4 float-end">
                 <?php
@@ -53,3 +63,5 @@ function IconPrint($arr)
 
 <!-- My scripts  -->
 <!-- <script src="./js/index.js"></script> -->
+
+<?php $conn->close() ?>
